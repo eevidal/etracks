@@ -1,28 +1,30 @@
-yii-auth
+Auth-Booster
 ========
 
-Auth is a module for the [Yii PHP framework](http://www.yiiframework.com) that provides a web user interface for Yii's built-in authorization manager (CAuthManager). 
+Originally developed by Christoffer Niska (aka @cniska) but since Auth is not now compatible anymore with Yii-Booster I decided to create a fork with all the power of Yii-Auth + Yii-Booster compatibility.
+
+AuthBooster is a module for the [Yii PHP framework](http://www.yiiframework.com) that provides a web user interface for Yii's built-in authorization manager (CAuthManager).
 You can read more about Yii's authorization manager in the framework documentation under [Authentication and Authorization](http://www.yiiframework.com/doc/guide/1.1/en/topics.auth#role-based-access-control).
 
-Auth was developed to provide a modern and responsive user interface for managing user permissions in Yii projects.
-To achieve its goals it was built using my popular [Twitter Bootstrap extension](http://www.yiiframework.com/extension/bootstrap).
+AuthBooster is developed to provide a modern and responsive user interface for managing user permissions in Yii projects.
+To achieve its goals it was built using [Twitter Bootstrap extension YiiBooster](http://www.yiiframework.com/extension/yiibooster).
 
-Auth is written according to Yii's conventions and it follows the [separation of concerns](http://en.wikipedia.org/wiki/Separation_of_concerns) priciple and therefore it doesn't require you to extend from its classes.
+AuthBooster is written according to Yii's conventions and it follows the [separation of concerns](http://en.wikipedia.org/wiki/Separation_of_concerns) principle and therefore it doesn't require you to extend from its classes.
 Instead it provides additional functionality for the authorization manager through a single behavior.
 
 ### Demo
 
-You can try out the live demo [here](http://www.cniska.net/yii-auth/).
+You can try out the live demo (soon).
 
 ### Requirements
 
-* [Twitter Bootstrap extension for Yii](http://www.yiiframework.com/extension/bootstrap) version 2.0.0 or above
+* [Twitter Bootstrap extension for Yii](http://www.yiiframework.com/extension/yiibooster) version 1.0.7 or above
 
 ## Usage
 
 ### Setup
 
-Download the latest release from [Yii extensions](http://www.yiiframework.com/extension/auth).
+Download the latest release from [Yii extensions](http://www.yiiframework.com/extension/authbooster).
 
 Unzip the module under ***protected/modules/auth*** and add the following to your application config:
 
@@ -116,4 +118,11 @@ Translations should be placed in the messages folder under a folder named accord
 
 ### Note
 
-Note: Version 1.0.6-wip use and require yiistrap!! yiistrap is next generation yii-bootsrap
+Note: This version DOES NOT require yiistrap!!
+
+###ChangeLog
+
+####Version 1.0.1
+* 2013-06-19: AuthBehavior optimizations to reduce number of queries. (Thanks to @kachar)
+* 2013-06-13: Fixed minor bug when CachedDbAuthManager is used by a child class located outside of auth module.
+* 2013-05-23: Added Turkish translation (Thanks to @rterzi)

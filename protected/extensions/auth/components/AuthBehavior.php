@@ -1,6 +1,7 @@
 <?php
 /**
  * AuthBehavior class file.
+ * @author Ricardo Obregón <ricardo@obregon.co>
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright Copyright &copy; Christoffer Niska 2012-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
@@ -24,11 +25,10 @@ class AuthBehavior extends CBehavior
      * @param string $itemName name of the item.
      * @return array
      */
-    public function getItems($itemName = null)
+    public function getItems($itemName=null)
     {
-        if ($itemName && isset($this->_items[$itemName])) {
+        if($itemName && isset($this->_items[$itemName]))
             return $this->_items[$itemName];
-        }
 
         return $this->_items;
     }
@@ -61,9 +61,8 @@ class AuthBehavior extends CBehavior
     public function getParents($itemName)
     {
         $items = $this->getItems($itemName);
-        if (isset($items['parents'])) {
+        if(isset($items['parents']))
             return $items['parents'];
-        }
 
         return array();
     }
@@ -76,9 +75,8 @@ class AuthBehavior extends CBehavior
     public function getChildren($itemName)
     {
         $items = $this->getItems($itemName);
-        if (isset($items['children'])) {
+        if(isset($items['children']))
             return $items['children'];
-        }
 
         return array();
     }
@@ -92,7 +90,7 @@ class AuthBehavior extends CBehavior
     public function hasParent($itemName, $parentName)
     {
         $parents = $this->getParents($itemName);
-        if (in_array($parentName, $parents)) {
+        if(in_array($parentName, $parents)) {
             return true;
         }
         return false;
@@ -107,7 +105,7 @@ class AuthBehavior extends CBehavior
     public function hasChild($itemName, $childName)
     {
         $children = $this->getChildren($itemName);
-        if (in_array($childName, $children)) {
+        if(in_array($childName, $children)) {
             return true;
         }
         return false;
@@ -158,16 +156,16 @@ class AuthBehavior extends CBehavior
     {
         $ancestors = array();
         $parents = $this->getParents($itemName);
-        if (empty($parents)) {
+        if(empty($parents)){
             $parents = $this->owner->db->createCommand()
                 ->select('parent')
                 ->from($this->owner->itemChildTable)
-                ->where('child=:child', array(':child' => $itemName))
+                ->where('child=:child', array(':child'=>$itemName))
                 ->queryColumn();
             $this->setItemParents($itemName, $parents);
         }
 
-        foreach ($parents as $parent) {
+        foreach($parents as $parent){
             $ancestors[] = array(
                 'name' => $parent,
                 'item' => $this->owner->getAuthItem($parent),
@@ -199,16 +197,16 @@ class AuthBehavior extends CBehavior
     {
         $descendants = array();
         $children = $this->getChildren($itemName);
-        if (empty($children)) {
+        if(empty($children)){
             $children = $this->owner->db->createCommand()
                 ->select('child')
                 ->from($this->owner->itemChildTable)
-                ->where('parent=:parent', array(':parent' => $itemName))
+                ->where('parent=:parent', array(':parent'=>$itemName))
                 ->queryColumn();
             $this->setItemChildren($itemName, $children);
         }
 
-        foreach ($children as $child) {
+        foreach($children as $child){
             $descendants[$child] = array(
                 'name' => $child,
                 'item' => $this->owner->getAuthItem($child),
@@ -229,11 +227,11 @@ class AuthBehavior extends CBehavior
     {
         $permissions = array();
 
-        if ($items === null) {
+        if ($items === null)
             $items = $this->owner->getAuthItems();
-        }
 
-        foreach ($items as $itemName => $item) {
+        foreach ($items as $itemName => $item)
+        {
             $permissions[$itemName] = array(
                 'name' => $itemName,
                 'item' => $item,
@@ -268,10 +266,10 @@ class AuthBehavior extends CBehavior
         $items = $this->getPermissions();
         $flat = $this->flattenPermissions($items);
 
-        foreach ($flat as $itemName => $item) {
-            if (in_array($itemName, $names)) {
+        foreach ($flat as $itemName => $item)
+        {
+            if (in_array($itemName, $names))
                 $permissions[$itemName] = $item;
-            }
         }
 
         return $permissions;
@@ -285,16 +283,17 @@ class AuthBehavior extends CBehavior
     public function flattenPermissions($permissions)
     {
         $flattened = array();
-        foreach ($permissions as $itemName => $itemPermissions) {
+        foreach ($permissions as $itemName => $itemPermissions)
+        {
             $flattened[$itemName] = $itemPermissions;
 
-            if (isset($itemPermissions['children'])) {
+            if(isset($itemPermissions['children'])) {
                 $children = $itemPermissions['children'];
                 unset($itemPermissions['children']); // not needed in a flat tree
                 $flattened = array_merge($flattened, $this->flattenPermissions($children));
             }
 
-            if (isset($itemPermissions['parents'])) {
+            if(isset($itemPermissions['parents'])) {
                 $parents = $itemPermissions['parents'];
                 unset($itemPermissions['parents']);
                 $flattened = array_merge($flattened, $this->flattenPermissions($parents));

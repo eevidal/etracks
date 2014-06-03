@@ -34,10 +34,9 @@ class AuthItemDescriptionColumn extends AuthItemColumn
         /* @var $am CAuthManager|AuthBehavior */
         $am = Yii::app()->getAuthManager();
 
-        $linkCssClass = $this->active || $am->hasParent($this->itemName, $data['name']) || $am->hasChild(
-            $this->itemName,
-            $data['name']
-        ) ? 'active' : 'disabled';
+        $linkCssClass = $this->active || $am->hasParent($this->itemName, $data['name']) || $am->hasChild($this->itemName, $data['name'])
+            ? 'active'
+            : 'disabled';
 
         /* @var $controller AuthItemController */
         $controller = $this->grid->getController();

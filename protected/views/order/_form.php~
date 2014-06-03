@@ -1,0 +1,83 @@
+<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
+	'id'=>'horizonatl',
+	'htmlOptions' => array('class' => 'well'),
+	'enableAjaxValidation'=>false,
+)); 
+/* cc
+$criter = new CDbCriteria;
+$criter->order = 'name ASC';
+
+$status <- Status::model()->findAll($criter);*/
+?>
+
+	<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+
+	<?php echo $form->errorSummary($model,$model_cli,$model_equi); ?>
+
+	
+
+	<?php echo $form->textFieldGroup($model,'equipment_id',array('class'=>'span5')); ?>
+
+	<?php //echo $form->textFieldGroup($model,'client_id',array('class'=>'span5')); ?>
+
+	        <?php echo $form->textFieldGroup($model_cli,'name',array('class'=>'span5')); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'comercial_name',array('class'=>'span5')); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'address1',array('class'=>'span5','maxlength'=>128)); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'phone1',array('class'=>'span5','maxlength'=>128)); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'phone2',array('class'=>'span5','maxlength'=>128)); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'mail',array('class'=>'span5','maxlength'=>128)); ?>
+
+        <?php echo $form->textAreaGroup($model_cli,'comment',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'city',array('class'=>'span5','maxlength'=>128)); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'contact',array('class'=>'span5')); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'type',array('class'=>'span5')); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'postal_code',array('class'=>'span5')); ?>
+
+        <?php echo $form->textFieldGroup($model_cli,'address2',array('class'=>'span5')); ?>
+
+        <?php echo $form->textFieldGroup($model_equi,'name',array('class'=>'span5')); ?>
+
+        <?php echo $form->textFieldGroup($model_equi,'serie',array('class'=>'span5')); ?>
+	
+
+	<?php echo $form->textFieldGroup($model,'fail',array('class'=>'span5')); ?>
+
+	<?php echo $form->checkBoxGroup($model,'warranty'); ?>
+	<?php echo $form->textAreaGroup($model,'adicional',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+
+	<?php echo $form->select2Group($model,'status',array(
+		'wrapperHtmlOptions' => array(	'class' => 'col-sm-5',),
+		'widgetOptions' => array(
+		'asDropDownList' => false,
+		'options' => array(
+			'tags' => array('clever', 'is', 'better', 'clevertech'),
+			'placeholder' => 'type clever, or is, or just type!',
+			/* 'width' => '40%', */
+			'tokenSeparators' => array(',', ' ')
+				)
+			)
+		)
+	)
+
+/*echo $form->typeAheadGroup($model, 'status_id', array('source'=> $status, 
+		'matcher'=>"js:function(item) { return ~item.toLowerCase().indexOf(this.query.toLowerCase()); }")) ; */?> 
+
+
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'type'=>'primary',
+			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+		)); ?>
+	</div>
+
+<?php $this->endWidget(); ?>

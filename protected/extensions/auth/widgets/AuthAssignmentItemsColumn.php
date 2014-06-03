@@ -44,4 +44,5 @@ class AuthAssignmentItemsColumn extends AuthAssignmentColumn
             echo ' <small>' . $controller->getItemTypeText($itemPermission['item']->type, false) . '</small><br />';
         }
     }
+
 }

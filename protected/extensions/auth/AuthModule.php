@@ -1,6 +1,7 @@
 <?php
 /**
  * AuthModule class file.
+ * @author Ricardo Obregón <ricardo@obregon.co>
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright Copyright &copy; Christoffer Niska 2012-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
@@ -150,6 +151,6 @@ class AuthModule extends CWebModule
      */
     public function getVersion()
     {
-        return '1.7.0';
+        return '1.6.0';
     }
 }

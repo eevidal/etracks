@@ -1,8 +1,9 @@
 <?php
 /**
  * AuthController class file.
+ * @author Ricardo Obregón <ricardo@obregon.co>
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
- * @copyright Copyright &copy; Christoffer Niska 2012-
+ * @copyright Copyright &copy; Ricardo Obregón 2012-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package auth.components
  */
@@ -13,6 +14,11 @@
  */
 abstract class AuthController extends CController
 {
+    /**
+     * @var string the default layout for the controller view.
+     */
+    public $layout = 'main';
+
     /**
      * @var array context menu items. This property will be assigned to {@link CMenu::items}.
      */
@@ -28,7 +34,7 @@ abstract class AuthController extends CController
     public function init()
     {
         parent::init();
-        $this->layout = $this->module->defaultLayout;
+        //$this->layout = $this->module->defaultLayout;
         $this->menu = $this->getSubMenu();
     }
 
