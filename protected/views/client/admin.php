@@ -46,15 +46,15 @@ return false;
 //		'id',
 		'name',
 		'comercial_name',
-		'address1',
-		'phone1',
+	//	'address1',
+	//	'phone1',
 	//	'phone2',
 		
 		'mail',
 //		'comment',
 		'city',
 		'contact',
-		'type',
+	//	'type',
 	//	'postal_code',
 	//	'address2',
 		

@@ -113,7 +113,7 @@ input.span-4, textarea.span-4 {width:138px;}
 input.span-5, textarea.span-5 {width:178px;}
 input.span-6, textarea.span-6 {width:218px;}
 input.span-7, textarea.span-7 {width:258px;}
-input.span-8, textarea.span-8 {width:298px;}
+input.span-8, textarea.span-8 , text.span8 {width:298px;}
 input.span-9, textarea.span-9 {width:338px;}
 input.span-10, textarea.span-10 {width:378px;}
 input.span-11, textarea.span-11 {width:418px;}
@@ -236,3 +236,21 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
+#Client_name {width:560px;margin-bottom:0.5em;}
+#Client_comercial_name {width:560px;margin-bottom:0.5em;}
+#Client_address1 {width:278px;margin-bottom:0.5em;}
+#Client_address2 {width:278px;margin-bottom:0.5em;}
+#Client_city {width:148px;margin-bottom:0.5em;}
+#Client_postal_code {width:126px;margin-bottom:0.5em;}
+#Client_phone1 {width:138px;margin-bottom:0.5em;}
+#Client_phone2 {width:136px;margin-bottom:0.5em;}
+#Client_mail {width:560px;margin-bottom:0.5em;}
+#Client_contact {width:560px;margin-bottom:0.5em;}
+#Client_comment {width:560px;margin-bottom:0.5em;}
+#Client_type {margin-bottom:0.5em;}
+#Client_id {margin-bottom:0.5em;}
+#Equipment_name {width:560px;margin-bottom:0.5em;}
+#Equipment_serie {width:560px;margin-bottom:0.5em;}
+#Order_fail {width:460px;height:100px; margin-bottom:0.5em;}
+#Order_adicional {width:460px;height:60px; margin-bottom:0.5em;}
+

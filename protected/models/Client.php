@@ -45,7 +45,7 @@ class Client extends CActiveRecord
 			array('comment, contact, type, postal_code, address2', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, comercial_name, address1, phone1, phone2, mail, comment, city, contact, type, postal_code, address2', 'safe', 'on'=>'search'),
+			array('id, name, comercial_name,  mail, city, contact,  postal_code',  'safe', 'on'=>'search'),
 		);
 	}
 
@@ -74,7 +74,7 @@ class Client extends CActiveRecord
 			'phone1' => 'Teléfono',
 			'phone2' => 'Teléfono',
 			'mail' => 'Mail',
-			'comment' => 'Comentario',
+			'comment' => 'Comentarios',
 			'city' => 'Ciudad',
 			'contact' => 'Contacto',
 			'type' => 'Tipo',
@@ -104,16 +104,16 @@ class Client extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('comercial_name',$this->comercial_name,true);
-		$criteria->compare('address1',$this->address1,true);
-		$criteria->compare('phone1',$this->phone1,true);
-		$criteria->compare('phone2',$this->phone2,true);
+// 		$criteria->compare('address1',$this->address1,true);
+// 		$criteria->compare('phone1',$this->phone1,true);
+// 		$criteria->compare('phone2',$this->phone2,true);
 		$criteria->compare('mail',$this->mail,true);
-		$criteria->compare('comment',$this->comment,true);
+// 		$criteria->compare('comment',$this->comment,true);
 		$criteria->compare('city',$this->city,true);
 		$criteria->compare('contact',$this->contact,true);
-		$criteria->compare('type',$this->type,true);
-		$criteria->compare('postal_code',$this->postal_code,true);
-		$criteria->compare('address2',$this->address2,true);
+//		$criteria->compare('type',$this->type,true);
+// 		$criteria->compare('postal_code',$this->postal_code,true);
+// 		$criteria->compare('address2',$this->address2,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

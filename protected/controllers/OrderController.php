@@ -15,7 +15,7 @@ class OrderController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+		//	'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -28,11 +28,11 @@ class OrderController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view',),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'ClientAutocomplete', 'EquipmentAutocomplete',),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -175,23 +175,71 @@ class OrderController extends Controller
 		}
 	}
 	
-	public function actionAutocomplete () {
+	public function actionClientLists()
+    {
+        $term = Yii::app()->request->getQuery('term');
+        $clientes = Client::model()->findAllByAttributes(array('name' => "%{$term}%"));
+        $lists = array();
+        foreach($countries as $client) {
+            $lists[] = array(
+					'value'=>$client->name,
+					'id'=>$client->id,
+            );
+        }
+        echo json_encode($lists);
+    }
+	
+	public function actionClientAutocomplete () {
 		if (isset($_GET['term'])) {
 			$criteria=new CDbCriteria;
-			$criteria->alias = "clients";
-			$criteria->condition = "clients.name like '" . $_GET['term'] . "%'";
-			$dataProvider = new CActiveDataProvider(get_class(Client::model()), array('criteria'=>$criteria,‘pagination’=>false,));
-			$clients = $dataProvider->getData();
+			//$criteria->alias = "clients";
+			//$criteria->condition = "clients.name like '" . $_GET['term'] . "%'";
+			$criteria->condition ="LOWER(name) like LOWER(:term) or LOWER(comercial_name) like LOWER(:term)";
+			$criteria->params = array(':term'=> '%'.$_GET['term'].'%');
+			//$dataProvider = new CActiveDataProvider(get_class(Client::model()), array('criteria'=>$criteria,‘pagination’=>false,));
+			//$clients = $dataProvider->getData();
+			$clients = Client::model()->findAll($criteria);
 			$return_array = array();
 			foreach($clients as $client) {
 				$return_array[] = array(
 					'label'=>$client->name,
 					'value'=>$client->name,
 					'id'=>$client->id,
+					'address1'=>$client->address1,
+					'address2'=>$client->address2,
+					'phone1'=>$client->phone1,
+					'phone2'=>$client->phone2,
+					'mail'=>$client->mail,
+					'contact'=>$client->contact,
+					'comment'=>$client->comment,
+					'city'=>$client->city,
+					'postal_code'=>$client->postal_code,
+					'comercial_name'=>$client->comercial_name,
+					'type'=>$client->type,
+					
 					);
 			}
  
 			echo CJSON::encode($return_array);
-		}
+		} 
 	}
+	
+	public function actionEquipmentAutocomplete () {
+		if (isset($_GET['term'])) {
+			$criteria=new CDbCriteria;
+			$criteria->condition ="LOWER(serie) like LOWER(:term) ";
+			$criteria->params = array(':term'=> '%'.$_GET['term'].'%');
+			$equipments = Equipment::model()->findAll($criteria);
+			foreach($equipments as $equipment) {
+				$return_array[] = array(
+					'label'=>$equipment->serie,
+					'value'=>$equipment->serie,
+					'name'=>$equipment->name,
+					'id'=>$equipment->id,
+					'serie'=>$equipment->serie,
+					);
+			}
+		}
+		echo CJSON::encode($return_array);
+	}	
 }

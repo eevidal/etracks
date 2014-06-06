@@ -2,6 +2,8 @@
 
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
+Yii::setPathOfAlias('ext', dirname(__FILE__).'/../extensions');
+
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 Yii::setPathOfAlias('booster', dirname(__FILE__).'/../extensions/booster');
 

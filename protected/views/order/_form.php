@@ -17,74 +17,52 @@ $status <- Status::model()->findAll($criter);*/
 
 	
 <div id=cliente>
-<h2>Datos del cliente             <?php echo $form->dropDownListGroup($model_cli,'type', array('wrapperHtmlOptions' =>  array(
-									    'class' => 'col-sm-8',
-									    ),
-								      'widgetOptions' => array(
-									      'data' => array('PÚBLICO', 'REVENDEDOR'),
-										    'htmlOptions' => array(),
-										)
-									)
-								); ?></h2>
-								
-	  <?php echo $form->typeAheadGroup($model_cli,'name',array(
-							'widgetOptions' => array(
-								  'options'=>array(
-									  'hint' => true,
-									  'highlight' => true,
-									  'minLength' => 1
-									  ),
-								'datasets'=>($model_cli->name)
-								),
-							'labelOptions' => array(
-								    'label' => 'Chtulhu sleeps in:',
-								    )
-							)
-					); ?>							
-	 <?php //echo $form->label($model_cli,Yii::t('messages','Nombre'));
+<h2>Datos del cliente           
+						
+<br>
 	 
-	 $this->widget('ext.typeahead.TypeAhead',array(
-       'model' => $model_cli,
-       'attribute' => 'name',
-       'options' => array(
-           array(
-               'name' => 'accounts',
-               'local' => array(
-                   'jquery',
-                   'ajax',
-                   'bootstrap'
-               ),
-           )
-       ),
-));
- ?>
-	 
-	 
+
+	 <?php echo $form->textFieldGroup($model_cli,'id',array('class'=>'span5')); ?>
+	   <?php echo $form->textFieldGroup($model_cli,'type',array('class'=>'span5')); ?></h2>
 	 
 	 
   <?php echo $form->hiddenField($model_cli,'id',array()); ?>
-// 	 <?php 
-// 	 $this->widget('zii.widgets.jui.CJuiAutoComplete',
-//     array(
-//       'model'=>$model_cli,
-//       'attribute'=>'name',
-//       'source'=>$this->createUrl('order/autocomplete'),
-//       //'htmlOptions'=>array('placeholder'=>'Any'),
-//       'options'=>
-//          array(
-//                'showAnim'=>'fold',
-//                'select'=>"js:function(clients, ui) {
-//                   $('#Client_id').val(ui.item.id);
-//                          }"
-//                 ),
-//       'cssFile'=>false,
-//     )); ?>
-	
+ 	 <?php 
+	 $this->widget('zii.widgets.jui.CJuiAutoComplete',
+    array(
+      'model'=>$model_cli,
+      'attribute'=>'name',
+      'name'=>'Client_name',
+      'source'=>  $this->createUrl('ClientAutocomplete'),
+      'htmlOptions'=>array('autocomplete'=>'off', 'placeholder'=>'Nombre'),
+      'options'=>
+         array(
+               'showAnim'=>'fold',
+               'select'=>'js:function(event, ui) 
+                { $(".Client_name").val(ui.item["name"]); 
+		  $("#Client_comercial_name").val(ui.item["comercial_name"]);
+		  $("#Client_address1").val(ui.item["address1"]);
+		  $("#Client_address2").val(ui.item["address2"]);
+		  $("#Client_city").val(ui.item["city"]);
+		  $("#Client_postal_code").val(ui.item["postal_code"]);
+		  $("#Client_phone1").val(ui.item["phone1"]);
+		  $("#Client_phone2").val(ui.item["phone2"]);
+		  $("#Client_mail").val(ui.item["mail"]);
+		  $("#Client_contacto").val(ui.item["constact"]);
+		  $("#Client_comment").val(ui.item["comment"]);
+		  $("#Client_id").val(ui.item["id"]);
+		  $("#Client_type").val(ui.item["type"]);
+		  
+		  }',
+                 
+                ),
+      'cssFile'=>true,
+   )); ?>
+
 
         <?php echo $form->textFieldGroup($model_cli,'comercial_name',array('class'=>'span8')); ?>
 
-<br>
-<br>
+
         <?php echo $form->textFieldGroup($model_cli,'address1',array('class'=>'span5','maxlength'=>128)); ?>
            <?php echo $form->textFieldGroup($model_cli,'address2',array('class'=>'span5')); ?>
                <?php echo $form->textFieldGroup($model_cli,'city',array('class'=>'span5','maxlength'=>128)); ?>
@@ -112,10 +90,30 @@ $status <- Status::model()->findAll($criter);*/
 
 	<?php //echo $form->textFieldGroup($model,'client_id',array('class'=>'span5')); ?>
 
-        <?php echo $form->textFieldGroup($model_equi,'name',array('class'=>'span5')); ?>
+      
 
-        <?php echo $form->textFieldGroup($model_equi,'serie',array('class'=>'span5')); ?>
-	
+     
+		 <?php 
+	 $this->widget('zii.widgets.jui.CJuiAutoComplete',
+    array(
+      'model'=>$model_equi,
+      'attribute'=>'serie',
+      'name'=>'Equipment_serie',
+      'source'=>  $this->createUrl('EquipmentAutocomplete'),
+      'htmlOptions'=>array('autocomplete'=>'off', 'placeholder'=>'Nº de Serie'),
+      'options'=>
+         array(
+               'showAnim'=>'fold',
+               'select'=>'js:function(event, ui) 
+                { $(".Equipment_serie").val(ui.item["serie"]); 
+		   $("#Equipment_name").val(ui.item["name"]);	
+                 }',
+                 
+                ),
+      'cssFile'=>true,
+   )); ?>
+   
+     <?php echo $form->textFieldGroup($model_equi,'name',array('class'=>'span5')); ?>
 <br>
 	<?php echo $form->textAreaGroup($model,'fail',array('class'=>'span8')); ?>
 
@@ -133,6 +131,9 @@ $status <- Status::model()->findAll($criter);*/
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'type'=>'primary',
+
+			'label'=>$model_cli->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model_equi->isNewRecord ? 'Create' : 'Save',
 			'label'=>$model->isNewRecord ? 'Create' : 'Save',
 		)); ?>
 	</div>
