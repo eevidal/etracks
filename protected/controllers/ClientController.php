@@ -173,17 +173,5 @@ class ClientController extends Controller
 		}
 	}
 	
-	public function actionClientlists()
-    {
-        $term = Yii::app()->request->getQuery('term');
-        $clientes = Client::model()->findAllByAttributes(array('name' => "%{$term}%"));
-        $lists = array();
-        foreach($countries as $client) {
-            $lists[] = array(
-					'value'=>$client->name,
-					'id'=>$client->id,
-            );
-        }
-        echo json_encode($lists);
-    }
+
 }

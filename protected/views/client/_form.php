@@ -7,16 +7,21 @@
 <p class="help-block">Fields with <span class="required">*</span> are required.</p>
 
 <?php echo $form->errorSummary($model); ?>
- <?php echo $form->dropDownListGroup($model,'type', array('wrapperHtmlOptions' =>  array(
-									    'class' => 'col-sm-8',
-									    ),
-								      'widgetOptions' => array(
-									      'data' => array('PUBLICO', 'REVENDEDOR'),
-										    'htmlOptions' => array(),
-										)
-									)
-								); ?>
-<?php echo $form->textFieldGroup($model,'id',array('class'=>'span5', 'id'=>'Client_id')); ?>								
+								
+ 
+ 	 <?php 
+	 $this->widget('zii.widgets.jui.CJuiAutoComplete',
+    array(
+    //  'model'=>$model_cli,
+
+      'name'=>'Client_typo',
+        'source'=>array('PUBLICO','REVENDEDOR'),
+       'htmlOptions'=>array(
+        'style'=>'height:34px;width:178px;margin-right:0.5em;', 'placeholder'=>'PUBLICO / REVENDEDOR',  
+        'select'=>'js:function(event, ui) {$(".Client_type").val(ui.item["type"]);}'
+    ),
+         )); ?>
+<?php echo $form->hiddenField($model,'type',array('class'=>'span5')); ?>								
 <br>
 	<?php echo $form->textFieldGroup($model,'name',array('class'=>'span5')); ?>
 

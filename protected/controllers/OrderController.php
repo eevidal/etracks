@@ -70,8 +70,17 @@ class OrderController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Order']))
-		{
+		{	
+			
 			$model->attributes=$_POST['Order'];
+			//$model_cli->attributes=$_POST['Client'];
+			$model_equi->attributes=$_POST['Equipment'];
+			$model->date=date();
+			$model->equipment_id=$_POST['Equipment']['id'];
+			$model->client_id=$_POST['Client']['id'];
+			$model->status_id='2';
+		//	var_dump($model_cli);
+		//	var_dump($model->attributes);
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -98,6 +107,7 @@ class OrderController extends Controller
 		if(isset($_POST['Order']))
 		{
 			$model->attributes=$_POST['Order'];
+			PC::debug('Short way to debug directly in PHP Console', 'some,debug,tags');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

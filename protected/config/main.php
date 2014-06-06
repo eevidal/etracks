@@ -13,6 +13,7 @@ Yii::setPathOfAlias('booster', dirname(__FILE__).'/../extensions/booster');
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Etracks',
+	'language' => 'es_ar',
 
 	// preloading 'log' component
 	'preload'=>array('log', 'bootstrap'),
@@ -104,12 +105,13 @@ return array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+					//'class'=>'CFileLogRoute',
+					//'levels'=>'error, warning',
+					'class' => 'ext.phpconsole.PhpConsoleLogRoute',
 				),
 				// uncomment the following to show log messages on web pages
-				/*
-				array(
+				
+			/*	array(
 					'class'=>'CWebLogRoute',
 				),
 				*/

@@ -40,7 +40,7 @@ class Client extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, comercial_name', 'required'),
+			array('name, comercial_name',  'required'),
 			array('address1, phone1, phone2, mail, city', 'length', 'max'=>128),
 			array('comment, contact, type, postal_code, address2', 'safe'),
 			// The following rule is used by search().
@@ -101,7 +101,7 @@ class Client extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('comercial_name',$this->comercial_name,true);
 // 		$criteria->compare('address1',$this->address1,true);

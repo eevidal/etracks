@@ -26,7 +26,7 @@ $status <- Status::model()->findAll($criter);*/
 	   <?php echo $form->textFieldGroup($model_cli,'type',array('class'=>'span5')); ?></h2>
 	 
 	 
-  <?php echo $form->hiddenField($model_cli,'id',array()); ?>
+
  	 <?php 
 	 $this->widget('zii.widgets.jui.CJuiAutoComplete',
     array(
@@ -52,6 +52,7 @@ $status <- Status::model()->findAll($criter);*/
 		  $("#Client_comment").val(ui.item["comment"]);
 		  $("#Client_id").val(ui.item["id"]);
 		  $("#Client_type").val(ui.item["type"]);
+	//	   $("#Order_client_id").val(ui.item["id"]);
 		  
 		  }',
                  
@@ -85,7 +86,7 @@ $status <- Status::model()->findAll($criter);*/
  
 </div>	
 <div>
-<h2>Datos del Equipo</h2>
+<h2>Datos del Equipo <?php echo $form->textFieldGroup($model_equi,'id',array('class'=>'span5')); ?></h2>
 	<?php //echo $form->textFieldGroup($model,'equipment_id',array('class'=>'span5')); ?>
 
 	<?php //echo $form->textFieldGroup($model,'client_id',array('class'=>'span5')); ?>
@@ -106,7 +107,9 @@ $status <- Status::model()->findAll($criter);*/
                'showAnim'=>'fold',
                'select'=>'js:function(event, ui) 
                 { $(".Equipment_serie").val(ui.item["serie"]); 
-		   $("#Equipment_name").val(ui.item["name"]);	
+		   $("#Equipment_name").val(ui.item["name"]);
+		    $("#Equipment_id").val(ui.item["id"]);
+		     $("#Order_equipment_id").val(ui.item["serie"]);
                  }',
                  
                 ),
@@ -132,8 +135,8 @@ $status <- Status::model()->findAll($criter);*/
 			'buttonType'=>'submit',
 			'type'=>'primary',
 
-			'label'=>$model_cli->isNewRecord ? 'Create' : 'Save',
-			'label'=>$model_equi->isNewRecord ? 'Create' : 'Save',
+			//'label'=>$model_cli->isNewRecord ? 'Create' : 'Save',
+			//'label'=>$model_equi->isNewRecord ? 'Create' : 'Save',
 			'label'=>$model->isNewRecord ? 'Create' : 'Save',
 		)); ?>
 	</div>
