@@ -75,7 +75,7 @@ class OrderController extends Controller
 			$model->attributes=$_POST['Order'];
 			//$model_cli->attributes=$_POST['Client'];
 			$model_equi->attributes=$_POST['Equipment'];
-			$model->date=date();
+			$model->date=date("Y/m/d",time());
 			$model->equipment_id=$_POST['Equipment']['id'];
 			$model->client_id=$_POST['Client']['id'];
 			$model->status_id='2';
