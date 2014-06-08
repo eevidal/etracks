@@ -73,11 +73,39 @@ class OrderController extends Controller
 		{	
 			
 			$model->attributes=$_POST['Order'];
-			//$model_cli->attributes=$_POST['Client'];
-			$model_equi->attributes=$_POST['Equipment'];
 			$model->date=date("Y/m/d",time());
-			$model->equipment_id=$_POST['Equipment']['id'];
-			$model->client_id=$_POST['Client']['id'];
+			
+			if(!empty($_POST['Equipment']['id']))
+			{
+				
+				$id_equi=$_POST['Equipment']['id'];
+				$model->equipment_id=$id_equi;
+				$model_equi=$this->loadModelEquipment($id_equi);
+				$model_equi->attributes=$_POST['Equipment'];
+				$model_equi->save();
+			}	
+			else
+			{	
+				$model_equi->attributes=$_POST['Equipment'];
+				if($model_equi->save())
+					$model->equipment_id=$model_equi->id;
+			}
+			
+			if(!empty($_POST['Client']['id']))
+			{
+				$id_cli=$_POST['Client']['id'];
+				$model->client_id=$id_cli;
+				$model_cli=$this->loadModelClient($id_cli);
+				$model_cli->attributes=$_POST['Client'];
+				$model_cli->save();
+			}	
+			else
+			{
+				$model_cli->attributes=$_POST['Client'];
+				if($model_cli->save())
+					$model->client_id=$model_cli->id;
+			}
+				
 			$model->status_id='2';
 		//	var_dump($model_cli);
 		//	var_dump($model->attributes);
@@ -116,6 +144,10 @@ class OrderController extends Controller
 			'model'=>$model,
 		));
 	}
+	
+
+
+	
 
 	/**
 	 * Deletes a particular model.
@@ -171,6 +203,22 @@ class OrderController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+	
+		public function loadModelClient($id)
+	{
+		$model=Client::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+	
+		public function loadModelEquipment($id)
+	{
+		$model=Equipment::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
 
 	/**
 	 * Performs the AJAX validation.
@@ -210,6 +258,7 @@ class OrderController extends Controller
 			//$clients = $dataProvider->getData();
 			$clients = Client::model()->findAll($criteria);
 			$return_array = array();
+		
 			foreach($clients as $client) {
 				$return_array[] = array(
 					'label'=>$client->name,
@@ -240,6 +289,7 @@ class OrderController extends Controller
 			$criteria->condition ="LOWER(serie) like LOWER(:term) ";
 			$criteria->params = array(':term'=> '%'.$_GET['term'].'%');
 			$equipments = Equipment::model()->findAll($criteria);
+			$return_array[]=array();
 			foreach($equipments as $equipment) {
 				$return_array[] = array(
 					'label'=>$equipment->serie,
