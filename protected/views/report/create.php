@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Report','url'=>array('index')),
+array('label'=>'Listar Informes','url'=>array('index')),
 array('label'=>'Manage Report','url'=>array('admin')),
 );
 ?>
 
-<h1>Create Report</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'model_order'=>$model_order,'model_cli'=>$model_cli, 'model_equi'=>$model_equi)); ?>

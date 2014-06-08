@@ -23,13 +23,13 @@ return false;
 ");
 ?>
 
-<h1>Manage Orders</h1>
+<h1>Buscar orden de trabajo</h1>
 
-<p>
+<!--<p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
 		&lt;&gt;</b>
 	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+</p>-->
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
@@ -44,11 +44,11 @@ return false;
 'filter'=>$model,
 'columns'=>array(
 		'id',
-		'date',
-		'equipment_id',
-		'client_id',
-		'fail',
-		'warranty',
+		//'date',
+		//'equipment_id',
+	//	'client_id',
+	//	'fail',
+	//	'warranty',
 		/*
 		'status_id',
 		'adicional',

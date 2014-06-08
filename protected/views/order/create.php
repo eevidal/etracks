@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Order','url'=>array('index')),
-	array('label'=>'Manage Order','url'=>array('admin')),
+	array('label'=>'Listar Ordenes de trabajo','url'=>array('index')),
+	array('label'=>'Administrar/Buscar Ordenes','url'=>array('admin')),
 );
 ?>
 
-<h1>Create Order</h1>
+<h1>Nuevo Ingreso</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model, 'model_cli'=>$model_cli, 'model_equi'=>$model_equi)); ?>

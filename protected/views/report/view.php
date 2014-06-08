@@ -19,7 +19,7 @@ array('label'=>'Manage Report','url'=>array('admin')),
 'data'=>$model,
 'attributes'=>array(
 		'id',
-		'user_id',
+		'technician',
 		'report',
 		'observation',
 		'order_id',
