@@ -31,13 +31,14 @@
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				  array('label'=>'Order', 'url'=>array('/order')),
-				  array('label'=>'Client', 'url'=>array('/client')),
+				array('label'=>'Inicio', 'url'=>array('/site/index')),
+				  array('label'=>'Ordenes', 'url'=>array('/order')),
+				  array('label'=>'Clientes', 'url'=>array('/client')),
+				 array('label'=>'Equipos', 'url'=>array('/equipment')),
+				  array('label'=>'Stock', 'url'=>array('/part/admin')),
 
-
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
+				//array('label'=>'Acerca de', 'url'=>array('/site/page', 'view'=>'about')),
+				//array('label'=>'Contacto', 'url'=>array('/site/contact')),
 				
 
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
@@ -54,12 +55,16 @@
 	<?php echo $content; ?>
 
 	<div class="clear"></div>
-
+	<div id="footer"></div>
+	<div id="marcas">.</div>
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
+ 		Copyright &copy; <?php echo date('Y'); ?> by Erica Vidal.
+		All Rights Reserved.<br/> 
+		
 		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
+	</div>
+	
+	<!-- footer -->
 
 </div><!-- page -->
 

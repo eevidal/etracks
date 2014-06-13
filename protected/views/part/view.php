@@ -5,15 +5,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Part','url'=>array('index')),
-array('label'=>'Create Part','url'=>array('create')),
-array('label'=>'Update Part','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Part','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Part','url'=>array('admin')),
+//array('label'=>'List Part','url'=>array('index')),
+array('label'=>'Crear Parte','url'=>array('create')),
+array('label'=>'Actualizar Parte','url'=>array('update','id'=>$model->id)),
+array('label'=>'Borrar Parte','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Seguro que quiere borrar este registro?')),
+array('label'=>'Administrar Parte','url'=>array('admin')),
 );
 ?>
 
-<h1>View Part #<?php echo $model->id; ?></h1>
+<h1>Detalles de la parte con registro #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,

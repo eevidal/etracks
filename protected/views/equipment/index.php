@@ -4,12 +4,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Create Equipment','url'=>array('create')),
-array('label'=>'Manage Equipment','url'=>array('admin')),
+array('label'=>'Crear Equipos','url'=>array('create')),
+array('label'=>'Buscar/administar Equipos','url'=>array('admin')),
 );
 ?>
 
-<h1>Equipments</h1>
+<h1>Equipos</h1>
 
 <?php $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

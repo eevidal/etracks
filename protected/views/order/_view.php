@@ -8,12 +8,16 @@
 	<?php echo CHtml::encode($data->date); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('equipment_id')); ?>:</b>
-	<?php echo CHtml::encode($data->equipment_id); ?>
+		<b><?php echo CHtml::encode($data->getAttributeLabel('equipment_id')); ?>:</b>
+	<?php echo CHtml::encode($data->equipment->name); ?>
 	<br />
 
+	
+
+
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('client_id')); ?>:</b>
-	<?php echo CHtml::encode($data->client_id); ?>
+	<?php echo CHtml::encode($data->client->name); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fail')); ?>:</b>
@@ -25,7 +29,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('status_id')); ?>:</b>
-	<?php echo CHtml::encode($data->status_id); ?>
+	<?php echo CHtml::encode($data->status->name); ?>
 	<br />
 
 

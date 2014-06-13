@@ -28,11 +28,11 @@ class OrderController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view',),
+				'actions'=>array('index','view','pdf'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'ClientAutocomplete', 'EquipmentAutocomplete',),
+				'actions'=>array('create','update', 'ClientAutocomplete', 'EquipmentAutocomplete','Pdf' ),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -302,4 +302,14 @@ class OrderController extends Controller
 		}
 		echo CJSON::encode($return_array);
 	}	
+
+	
+	 public function actionPdf($id)
+	{
+		 $this->renderPartial('pdf',array(
+			'model'=>$this->loadModel($id),
+		));
+//		
+	}
+
 }

@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Part','url'=>array('index')),
-array('label'=>'Manage Part','url'=>array('admin')),
+//array('label'=>'List Part','url'=>array('index')),
+array('label'=>'Administrar Partes','url'=>array('admin')),
 );
 ?>
 
-<h1>Create Part</h1>
+<h1>Crear Parte</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

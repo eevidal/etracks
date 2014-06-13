@@ -32,7 +32,7 @@ class ReportController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','PartAutocomplete','Pdf'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -60,12 +60,15 @@ class ReportController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($id)
 	{
 		$model=new Report;
-		$model_order=new Order;
-		$model_cli = new Client;
-		$model_equi = new Equipment;
+		$model_order=Order::model()->findByPk($id);
+		$model_cli = Client::model()->findByPk($model_order->client_id);
+		$model_equi =Equipment::model()->findByPk($model_order->equipment_id);
+		$model_part=new Part;
+		
+		//$model_part_report=new ReportPart;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -73,15 +76,34 @@ class ReportController extends Controller
 		if(isset($_POST['Report']))
 		{
 			$model->attributes=$_POST['Report'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
+			$model->order_id=$model_order->id;
+ 			if($model->save())
+			{
+				if(!empty($_POST['Part']))
+				{
+					$parts= $_POST['Part'];	
+					foreach($parts as $part) 
+					{	
+						$model_part_report=new ReportPart;
+						$model_part_report->part_id=$part;
+						$model_part_report->report_id=$model->id;
+						$model_part_report->quantity=1;
+						$model_part_report->save();
+					}
+				}
+				
+ 				$this->redirect(array('view','id'=>$model->id));
+			}
+ 		}
+		
 
+		
 		$this->render('create',array(
 			'model'=>$model,
 			'model_order'=>$model_order,
 			'model_cli'=>$model_cli,
 			'model_equi'=>$model_equi,
+			'model_part'=>$model_part,
 		));
 	}
 
@@ -93,6 +115,16 @@ class ReportController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		$model_order=Order::model()->findByPk($model->order_id);
+		$model_cli = Client::model()->findByPk($model_order->client_id);
+		$model_equi =Equipment::model()->findByPk($model_order->equipment_id);
+		$criteria=new CDbCriteria;
+
+		$criteria->condition ="report_id = '$id'";
+		$model_part_report=ReportPart::model()->findAll($criteria);
+		
+		$model_part=new Part;
+		
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -106,6 +138,11 @@ class ReportController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'model_order'=>$model_order,
+			'model_cli'=>$model_cli,
+			'model_equi'=>$model_equi,
+			'model_part'=>$model_part,
+			'model_part_report'=>$model_part_report,
 		));
 	}
 
@@ -176,4 +213,26 @@ class ReportController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+		public function actionPartAutocomplete () {
+		if (isset($_GET['term'])) {
+			$criteria=new CDbCriteria;
+			$criteria->condition ="LOWER(name) like LOWER(:term) ";
+			$criteria->params = array(':term'=> '%'.$_GET['term'].'%');
+			$parts = Part::model()->findAll($criteria);
+			$return_array[]=array();
+			foreach($parts as $part) {
+				$return_array[] = array(
+					'label'=>$part->name,
+					'value'=>$part->name,
+					'name'=>$part->name,
+					'id'=>$part->id,
+					'description'=>$part->description,
+					'stock'=>$part->stock,
+					);
+			}
+		}
+		echo CJSON::encode($return_array);
+	}
+
 }

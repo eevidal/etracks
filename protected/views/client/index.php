@@ -4,12 +4,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Create Client','url'=>array('create')),
-array('label'=>'Manage Client','url'=>array('admin')),
+array('label'=>'Nuevo Cliente','url'=>array('create')),
+array('label'=>'Buscar/Admnistar Cliente','url'=>array('admin')),
 );
 ?>
 
-<h1>Clients</h1>
+<h1>Clientes</h1>
 
 <?php $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

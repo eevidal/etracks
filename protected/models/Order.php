@@ -70,11 +70,11 @@ class Order extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Número de Ingreo',
+			'id' => 'Número de Orden',
 			'date' => 'Fecha de ingreso',
 			'equipment_id' => 'Equipo',
 			'client_id' => 'Cliente',
-			'fail' => 'Falla',
+			'fail' => 'Falla comunicada',
 			'warranty' => 'Garantía',
 			'status_id' => 'Estado',
 			'adicional' => 'Adicionales (accesorios/cartucho/partes)',

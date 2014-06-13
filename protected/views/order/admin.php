@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Order','url'=>array('index')),
-array('label'=>'Create Order','url'=>array('create')),
+array('label'=>'Listar Ordenes','url'=>array('index')),
+array('label'=>'Nuevo Ingreso','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -46,7 +46,7 @@ return false;
 		'id',
 		//'date',
 		//'equipment_id',
-	//	'client_id',
+		'client_id',
 	//	'fail',
 	//	'warranty',
 		/*

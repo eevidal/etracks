@@ -116,6 +116,8 @@ $status <- Status::model()->findAll($criter);*/
       'cssFile'=>true,
    )); ?>
    
+
+   
      <?php echo $form->textFieldGroup($model_equi,'name',array('class'=>'span5')); ?>
 <br>
 	<?php echo $form->textAreaGroup($model,'fail',array('class'=>'span8')); ?>
@@ -135,9 +137,7 @@ $status <- Status::model()->findAll($criter);*/
 			'buttonType'=>'submit',
 			'type'=>'primary',
 
-			//'label'=>$model_cli->isNewRecord ? 'Create' : 'Save',
-			//'label'=>$model_equi->isNewRecord ? 'Create' : 'Save',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? 'Crear' : 'Guardar',
 		)); ?>
 	</div>
 

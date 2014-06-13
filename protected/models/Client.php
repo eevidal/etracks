@@ -104,16 +104,16 @@ class Client extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('comercial_name',$this->comercial_name,true);
-// 		$criteria->compare('address1',$this->address1,true);
-// 		$criteria->compare('phone1',$this->phone1,true);
-// 		$criteria->compare('phone2',$this->phone2,true);
+ 		$criteria->compare('address1',$this->address1,true);
+ 		$criteria->compare('phone1',$this->phone1,true);
+ 		$criteria->compare('phone2',$this->phone2,true);
 		$criteria->compare('mail',$this->mail,true);
-// 		$criteria->compare('comment',$this->comment,true);
+		$criteria->compare('comment',$this->comment,true);
 		$criteria->compare('city',$this->city,true);
 		$criteria->compare('contact',$this->contact,true);
-//		$criteria->compare('type',$this->type,true);
-// 		$criteria->compare('postal_code',$this->postal_code,true);
-// 		$criteria->compare('address2',$this->address2,true);
+		$criteria->compare('type',$this->type,true);
+ 		$criteria->compare('postal_code',$this->postal_code,true);
+ 		$criteria->compare('address2',$this->address2,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

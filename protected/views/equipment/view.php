@@ -5,15 +5,16 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Equipment','url'=>array('index')),
-array('label'=>'Create Equipment','url'=>array('create')),
-array('label'=>'Update Equipment','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Equipment','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Equipment','url'=>array('admin')),
+array('label'=>'Listar Equipo','url'=>array('index')),
+array('label'=>'Crear Equipo','url'=>array('create')),
+array('label'=>'Actualizar Equipo','url'=>array('update','id'=>$model->id)),
+
+//array('label'=>'Delete Equipment','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>'Buscar/administar Equipos','url'=>array('admin')),
 );
 ?>
 
-<h1>View Equipment #<?php echo $model->id; ?></h1>
+<h1>Detalles del Equipo #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,

@@ -9,19 +9,25 @@
 <?php echo $form->errorSummary($model); ?>
 								
  
- 	 <?php 
-	 $this->widget('zii.widgets.jui.CJuiAutoComplete',
-    array(
-    //  'model'=>$model_cli,
-
-      'name'=>'Client_typo',
-        'source'=>array('PUBLICO','REVENDEDOR'),
-       'htmlOptions'=>array(
-        'style'=>'height:34px;width:178px;margin-right:0.5em;', 'placeholder'=>'PUBLICO / REVENDEDOR',  
-        'select'=>'js:function(event, ui) {$(".Client_type").val(ui.item["type"]);}'
-    ),
-         )); ?>
-<?php echo $form->hiddenField($model,'type',array('class'=>'span5')); ?>								
+<?php echo $form->select2Group(
+			$model,
+			'type',
+			array(
+				'wrapperHtmlOptions' => array(
+					'class' => 'col-sm-5',
+				),
+				'widgetOptions' => array(
+					'asDropDownList' => false,
+					'options' => array(
+						'tags' => array('PUBLICO', 'REVENDEDOR'),
+						'placeholder' => 'PUBLICO/REVENDEDOR',
+						/* 'width' => '40%', */
+						'tokenSeparators' => array(',', ' ')
+					)
+				)
+			)
+		);?>
+<?php //echo $form->textFieldGroup($model,'type',array('class'=>'span5')); ?>								
 <br>
 	<?php echo $form->textFieldGroup($model,'name',array('class'=>'span5')); ?>
 
@@ -58,7 +64,7 @@
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? 'Crear' : 'Guardar',
 		)); ?>
 </div>
 

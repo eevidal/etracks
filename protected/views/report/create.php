@@ -12,4 +12,4 @@ array('label'=>'Manage Report','url'=>array('admin')),
 
 
 
-<?php echo $this->renderPartial('_form', array('model'=>$model, 'model_order'=>$model_order,'model_cli'=>$model_cli, 'model_equi'=>$model_equi)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'model_order'=>$model_order,'model_cli'=>$model_cli, 'model_equi'=>$model_equi, 'model_part'=>$model_part,)); ?>

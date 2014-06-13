@@ -4,12 +4,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Order','url'=>array('create')),
-	array('label'=>'Manage Order','url'=>array('admin')),
+	array('label'=>'Nuevo Ingreso','url'=>array('create')),
+	array('label'=>'Administrar Ordenes','url'=>array('admin')),
 );
 ?>
 
-<h1>Orders</h1>
+<h1>Ordenes de trabajo</h1>
 
 <?php $this->widget('bootstrap.widgets.TbListView',array(
 	'dataProvider'=>$dataProvider,

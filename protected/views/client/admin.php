@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Client','url'=>array('index')),
-array('label'=>'Create Client','url'=>array('create')),
+array('label'=>'Listar Cliente','url'=>array('index')),
+array('label'=>'Nuevo Cliente','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,15 +23,11 @@ return false;
 ");
 ?>
 
-<h1>Manage Clients</h1>
+<h1>Buscar Clientes</h1>
 
-<p>
-	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
-		&lt;&gt;</b>
-	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+
+<?php echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -50,10 +46,10 @@ return false;
 	//	'phone1',
 	//	'phone2',
 		
-		'mail',
+		//'mail',
 //		'comment',
-		'city',
-		'contact',
+	//	'city',
+	//	'contact',
 	//	'type',
 	//	'postal_code',
 	//	'address2',

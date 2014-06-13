@@ -6,22 +6,22 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 array('label'=>'List Report','url'=>array('index')),
-array('label'=>'Create Report','url'=>array('create')),
+//array('label'=>'Create Report','url'=>array('create')),
 array('label'=>'Update Report','url'=>array('update','id'=>$model->id)),
 array('label'=>'Delete Report','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 array('label'=>'Manage Report','url'=>array('admin')),
 );
 ?>
 
-<h1>View Report #<?php echo $model->id; ?></h1>
+<h1>Informe nº<?php echo $model->id; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
 'attributes'=>array(
-		'id',
+		//'id',
 		'technician',
 		'report',
 		'observation',
-		'order_id',
+		array('label'=>'Order', 'value'=>$model->order->id),
 ),
 )); ?>
