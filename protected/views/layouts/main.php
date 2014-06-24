@@ -26,6 +26,7 @@
 
 	<div id="header">
 		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="logo1"></div>
 	</div><!-- header -->
 
 	<div id="mainmenu">

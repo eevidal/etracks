@@ -16,3 +16,8 @@ $this->menu=array(
 <h1>Actualizar datos de la Orden <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_formupdate',array('model'=>$model)); ?>
+
+
+
+
+

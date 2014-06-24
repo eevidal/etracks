@@ -51,10 +51,16 @@ class OrderController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$criteria=new CDbCriteria;
+
+		$criteria->condition ="order_id = '$id'";
+		$model_report=Report::model()->findAll($criteria);
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+			'model_report'=>$model_report,
 		));
 	}
+
 
 	/**
 	 * Creates a new model.
@@ -154,14 +160,14 @@ class OrderController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
-	{
-		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
+// 	public function actionDelete($id)
+// 	{
+// 		$this->loadModel($id)->delete();
+// 
+// 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// 		if(!isset($_GET['ajax']))
+// 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+// 	}
 
 	/**
 	 * Lists all models.
@@ -219,6 +225,7 @@ class OrderController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+
 
 	/**
 	 * Performs the AJAX validation.

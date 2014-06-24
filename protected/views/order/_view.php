@@ -5,7 +5,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('date')); ?>:</b>
-	<?php echo CHtml::encode($data->date); ?>
+	<?php echo CHtml::encode(date("d-m-Y",strtotime($data->date))); ?>
 	<br />
 
 		<b><?php echo CHtml::encode($data->getAttributeLabel('equipment_id')); ?>:</b>

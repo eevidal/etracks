@@ -220,9 +220,44 @@ facultado para disponer del mismo, perdiendo el cliente todo derecho a reclamo o
 </table>
 </div>
 <!-- <div id="footer">    </div> -->
+<br/>
+<div style="border-top: thin dotted; with:670px;"></div>
+<div class="view"  >
+
+<font  style="color:#6E6E6E"><h3>Para el departamento técnico</h3></font>
+<br/>
+<b>Orden de trabajo Nº: </b>
+<?php echo CHtml::encode($data->id); ?>
+<br>
+<b>Fecha de Ingreso:</b>
+<?php echo CHtml::encode(date("d-m-Y",strtotime($data->date))); ?>
+	<br/>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('client_id')); ?>:</b>
+	<?php echo CHtml::encode($data->client->name); ?>
+	<br/>
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('equipment_id')); ?>:</b>
+	<?php echo CHtml::encode($data->equipment->name); ?>
+	<br/>
+	<b>Nº de serie</b>
+	<?php echo CHtml::encode($data->equipment->serie); ?>
+	<br/>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('fail')); ?>:</b>
+	<?php echo CHtml::encode($data->fail); ?>
+	<br/>
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('warranty')); ?>:</b>
+	<?php if($data->warranty) echo "Sí";
+	else  echo "No"; ?>
+	<br/>
+		<b><?php echo CHtml::encode($data->getAttributeLabel('adicional')); ?>:</b>
+	<?php echo CHtml::encode($data->adicional); ?>
+	<br>
+</div>	
+
 
 </div>
-<div id="marcas"><img src="http://localhost/etracks/images/marcas.pdf.jpg" ></div>
+<!-- <div id="marcas"><img src="http://localhost/etracks/images/marcas.pdf.jpg" ></div> -->
 </page>
 
 <page>

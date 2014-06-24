@@ -7,7 +7,7 @@
     ob_start();
     echo $this->renderPartial('_pdf', array('model'=>$model,)); 
     $content = ob_get_clean();
- 
+ $id=$model->id;
   //  convert in PDF
     Yii::import('application.extensions.html2pdf.html2pdf');
     try
@@ -17,7 +17,7 @@
         $html2pdf->setDefaultFont('Arial');
         $html2pdf->writeHTML($content);
       //  echo var_dump($html2pdf);
-        $html2pdf->Output("S.pdf");
+        $html2pdf->Output("orden".$id.".pdf");
     }
     catch(html2pdf_exception $e) {
         echo $e;

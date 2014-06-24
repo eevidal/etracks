@@ -32,7 +32,7 @@ class ReportController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','PartAutocomplete','Pdf'),
+				'actions'=>array('create','update','PartAutocomplete','Pdf', 'OrderView'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -55,7 +55,19 @@ class ReportController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
+	
+	public function actionOrderView($id)
+	{
+		$criteria=new CDbCriteria;
 
+		$criteria->condition ="order_id = '$id'";
+		$model=Report::model()->findAll($criteria);
+	
+		//$idd=$model["id"];
+		$this->render('order_view',array(
+			'model'=>$model[0],
+		));
+	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -77,6 +89,7 @@ class ReportController extends Controller
 		{
 			$model->attributes=$_POST['Report'];
 			$model->order_id=$model_order->id;
+			 // change the order status to in revision
  			if($model->save())
 			{
 				if(!empty($_POST['Part']))
@@ -92,9 +105,14 @@ class ReportController extends Controller
 					}
 				}
 				
+				$model_order->status_id='9';
+				$model_order->save();
+				
+				
  				$this->redirect(array('view','id'=>$model->id));
 			}
  		}
+		
 		
 
 		
@@ -151,14 +169,14 @@ class ReportController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
-	{
-		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
+// 	public function actionDelete($id)
+// 	{
+// 		$this->loadModel($id)->delete();
+// 
+// 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// 		if(!isset($_GET['ajax']))
+// 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+// 	}
 
 	/**
 	 * Lists all models.

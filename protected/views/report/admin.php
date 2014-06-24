@@ -45,8 +45,8 @@ return false;
 'columns'=>array(
 		'id',
 		'technician',
-		'report',
-		'observation',
+// 		'report',
+// 		'observation',
 		'order_id',
 array(
 'class'=>'booster.widgets.TbButtonColumn',

@@ -10,6 +10,6 @@ array('label'=>'Manage ReportPart','url'=>array('admin')),
 );
 ?>
 
-<h1>Create ReportPart</h1>
+<h1>Agregar partes</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'model_part'=>$model_part,'model_report'=>$model_report)); ?>

@@ -63,19 +63,23 @@ class ReportPartController extends Controller
 	public function actionCreate( $report_id)
 	{
 		$model=new ReportPart;
-
+		$model_part=new Part;
+		$model_report=Report::model()->findByPk($report_id);
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['ReportPart']))
 		{
 			$model->attributes=$_POST['ReportPart'];
+			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'model_part'=>$model_part,
+			'model_report'=>$model_report,
 		));
 	}
 

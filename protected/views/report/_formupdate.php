@@ -36,11 +36,11 @@
 	<?php echo CHtml::encode($data->status->name); ?>
 	<br/>
 	<b class="report"><?php echo CHtml::encode($data->getAttributeLabel('fail')); ?>:</b>
-	<?php echo CHtml::encode($data->fail); ?>
+	<?php $gar= array('Sí', 'No'); echo CHtml::encode($data->fail); ?>
 	<br/>
 
 	<b class="report"><?php echo CHtml::encode($data->getAttributeLabel('warranty')); ?>:</b>
-	<?php echo CHtml::encode($data->warranty); ?>
+	<?php echo CHtml::encode($gar[$data->warranty]); ?>
 	<br/>
 	<b class="report"><?php echo CHtml::encode($data->getAttributeLabel('adicional')); ?>:</b>
 	<?php echo CHtml::encode($data->adicional); ?>

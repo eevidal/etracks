@@ -7,9 +7,9 @@ $this->breadcrumbs=array(
 
 	$this->menu=array(
 	array('label'=>'Listar Informes','url'=>array('index')),
-	//array('label'=>'Create Report','url'=>array('create')),
-	array('label'=>'View Report','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Report','url'=>array('admin')),
+	array('label'=>'Agregar partes','url'=>array('reportPart/create', 'report_id'=>$model->id)),
+	array('label'=>'Ver Informe','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar/buscar Informe','url'=>array('admin')),
 	);
 	?>
 
