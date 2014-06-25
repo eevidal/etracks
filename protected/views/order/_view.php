@@ -12,10 +12,6 @@
 	<?php echo CHtml::encode($data->equipment->name); ?>
 	<br />
 
-	
-
-
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('client_id')); ?>:</b>
 	<?php echo CHtml::encode($data->client->name); ?>
 	<br />

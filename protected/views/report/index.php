@@ -3,13 +3,13 @@ $this->breadcrumbs=array(
 	'Reports',
 );
 
-$this->menu=array(
-array('label'=>'Create Report','url'=>array('create')),
-array('label'=>'Manage Report','url'=>array('admin')),
-);
+// $this->menu=array(
+// array('label'=>'Create Report','url'=>array('create')),
+// array('label'=>'Manage Report','url'=>array('admin')),
+// );
 ?>
 
-<h1>Reports</h1>
+<h1>Informes</h1>
 
 <?php $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,

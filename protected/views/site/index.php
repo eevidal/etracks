@@ -13,7 +13,54 @@ $this->pageTitle=Yii::app()->name;
 	<li>View file: <code><?php echo __FILE__; ?></code></li>
 	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
 </ul>-->
+<?php
+$this->widget(
+    'booster.widgets.TbPanel',
+    array(
+        'title' => 'Nuevos Ingresos',
+    	'context' => 'primary',
+        'headerIcon' => 'home',
+        'content' => ''
+    )
+);
+$this->widget(
+		'booster.widgets.TbPanel',
+		array(
+				'title' => 'Listos',
+				'context' => 'success',
+				'headerIcon' => 'home',
+				'content' => ''
+		)
+);
+$this->widget(
+		'booster.widgets.TbPanel',
+		array(
+				'title' => 'En revisión',
+				'context' => 'info',
+				'headerIcon' => 'home',
+				'content' => ''
+		)
+);
+$this->widget(
+		'booster.widgets.TbPanel',
+		array(
+				'title' => 'Para presupuestar',
+				'context' => 'warning',
+				'headerIcon' => 'home',
+				'content' => ''
+		)
+);
+$this->widget(
+		'booster.widgets.TbPanel',
+		array(
+				'title' => 'Autorizadas y pendientes',
+				'context' => 'danger',
+				'headerIcon' => 'home',
+				'content' => ''
+		)
+);?>
 
+<!--
 <p>Por cualquier duda recurra al manual de docuamentación
- <a href="http://www.yiiframework.com/doc/">documentation</a>.
+ <a href="http://www.yiiframework.com/doc/">documentation</a>.-->
 

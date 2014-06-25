@@ -32,11 +32,11 @@ class OrderController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'ClientAutocomplete', 'EquipmentAutocomplete','Pdf' ),
+				'actions'=>array('create','update', 'ClientAutocomplete', 'EquipmentAutocomplete','Pdf','change'  ),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -108,6 +108,7 @@ class OrderController extends Controller
 			else
 			{
 				$model_cli->attributes=$_POST['Client'];
+				var_dump($model_cli);
 				if($model_cli->save())
 					$model->client_id=$model_cli->id;
 			}
@@ -151,7 +152,27 @@ class OrderController extends Controller
 		));
 	}
 	
+	public function actionChange($id)
+	{
+		$model=$this->loadModel($id);
+		$model_status=new Status;
+		
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
 
+		if(isset($_POST['Order']))
+		{
+			$model->attributes=$_POST['Order'];
+			PC::debug('Short way to debug directly in PHP Console', 'some,debug,tags');
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
+		}
+
+		$this->render('change',array(
+			'model'=>$model,
+			'model_status'=>$model_status,
+		));
+	}
 
 	
 
@@ -179,6 +200,8 @@ class OrderController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+	
+	
 
 	/**
 	 * Manages all models.
@@ -186,12 +209,14 @@ class OrderController extends Controller
 	public function actionAdmin()
 	{
 		$model=new Order('search');
+		$model_client=new Client('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Order']))
 			$model->attributes=$_GET['Order'];
 
 		$this->render('admin',array(
 			'model'=>$model,
+			'model_client'=>$model_client,
 		));
 	}
 
@@ -309,7 +334,9 @@ class OrderController extends Controller
 		}
 		echo CJSON::encode($return_array);
 	}	
-
+	
+	
+	
 	
 	 public function actionPdf($id)
 	{

@@ -8,8 +8,9 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Listar Ordenes','url'=>array('index')),
 	array('label'=>'Nuevo ingreso','url'=>array('create')),
-	array('label'=>'Vier Orden','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Ver Orden','url'=>array('view','id'=>$model->id)),
 	array('label'=>'Administrar/Buscar Orden','url'=>array('admin')),
+	array('label'=>'Cambiar Estado','url'=>array('change', 'id'=>$model->id)),
 );
 ?>
 

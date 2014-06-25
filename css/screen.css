@@ -260,6 +260,7 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 #Part_name {width:200px;margin-bottom:0.5em;}
 #Part_description {width:360px;margin-bottom:0.5em;}
 #Part_stock {width:100px;margin-bottom:0.5em;}
+#ReportPart_quantity {width:70px;}
 #marcas{background:url('../images/marcas.pdf.jpg'); 
 	height:31px;
 /*  	width:670px;   */

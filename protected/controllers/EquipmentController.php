@@ -35,7 +35,7 @@ array('allow', // allow authenticated user to perform 'create' and 'update' acti
 'users'=>array('@'),
 ),
 array('allow', // allow admin user to perform 'admin' and 'delete' actions
-'actions'=>array('admin','delete'),
+'actions'=>array('admin'),
 'users'=>array('admin'),
 ),
 array('deny',  // deny all users
@@ -107,20 +107,20 @@ $this->render('update',array(
 * If deletion is successful, the browser will be redirected to the 'admin' page.
 * @param integer $id the ID of the model to be deleted
 */
-public function actionDelete($id)
-{
-if(Yii::app()->request->isPostRequest)
-{
-// we only allow deletion via POST request
-$this->loadModel($id)->delete();
-
-// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-if(!isset($_GET['ajax']))
-$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-}
-else
-throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-}
+// public function actionDelete($id)
+// {
+// if(Yii::app()->request->isPostRequest)
+// {
+// // we only allow deletion via POST request
+// $this->loadModel($id)->delete();
+// 
+// // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// if(!isset($_GET['ajax']))
+// $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+// }
+// else
+// throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+// }
 
 /**
 * Lists all models.

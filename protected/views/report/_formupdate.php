@@ -98,7 +98,7 @@ if(!empty($return_array))
 	 echo "<td>".$p['quantity']."</td>";
 	echo "<td class='button-column'>
 	 <a class='update'  data-toggle='tooltip'
-	 href='/etracks/index.php?r=reporPart/update&id=".$p['id']." data-original-title='Update'>
+	 href='/etracks/index.php?r=reportPart/update&id=".$p['id']."'data-original-title='Update'>
 	 <i class='glyphicon glyphicon-pencil'></i></a>
 	 <a class='delete'  data-toggle='tooltip' href='/etracks/index.php?r=reportPart/delete&id=".$p['id']."' data-original-title='Delete'>
 	 <i class='glyphicon glyphicon-trash'></i></a></td>";

@@ -62,26 +62,15 @@ $status <- Status::model()->findAll($criter);*/
 
 
         <?php echo $form->textFieldGroup($model_cli,'comercial_name',array('class'=>'span8')); ?>
-
-
         <?php echo $form->textFieldGroup($model_cli,'address1',array('class'=>'span5','maxlength'=>128)); ?>
-           <?php echo $form->textFieldGroup($model_cli,'address2',array('class'=>'span5')); ?>
-               <?php echo $form->textFieldGroup($model_cli,'city',array('class'=>'span5','maxlength'=>128)); ?>
-          <?php echo $form->textFieldGroup($model_cli,'postal_code',array('class'=>'input-large')); ?>     
-
+        <?php echo $form->textFieldGroup($model_cli,'address2',array('class'=>'span5')); ?>
+        <?php echo $form->textFieldGroup($model_cli,'city',array('class'=>'span5','maxlength'=>128)); ?>
+        <?php echo $form->textFieldGroup($model_cli,'postal_code',array('class'=>'input-large')); ?>     
         <?php echo $form->textFieldGroup($model_cli,'phone1',array('class'=>'span5','maxlength'=>128)); ?>
-
         <?php echo $form->textFieldGroup($model_cli,'phone2',array('class'=>'span5','maxlength'=>128)); ?>
-
         <?php echo $form->textFieldGroup($model_cli,'mail',array('class'=>'span5','maxlength'=>128)); ?>
-
-   
-
-    
-
         <?php echo $form->textFieldGroup($model_cli,'contact',array('class'=>'span5')); ?>
- <br> 
-           <?php echo $form->textAreaGroup($model_cli,'comment',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+	<br> <?php echo $form->textAreaGroup($model_cli,'comment',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
       
  
 </div>	

@@ -58,8 +58,8 @@ class ReportPart extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'part_id' => 'Part',
-			'report_id' => 'Report',
+			'part_id' => 'Parte',
+			'report_id' => 'Nº Informe',
 			'quantity' => 'Cantidad',
 			'id' => 'ID',
 		);

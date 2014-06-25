@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Orders'=>array('index'),
+	'Orders'=>array('index2'),
 	'Manage',
 );
 
@@ -23,18 +23,41 @@ return false;
 ");
 ?>
 
-<h1>Buscar orden de trabajo</h1>
+
 
 <!--<p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
 		&lt;&gt;</b>
 	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>-->
+<?php $this->widget('zii.widgets.jui.CJuiAutoComplete',
+    array(
+      'model'=>$model_client,
+      'attribute'=>'name',
+      'name'=>'Client_name',
+      'source'=>  $this->createUrl('ClientAutocomplete'),
+      'htmlOptions'=>array('autocomplete'=>'off', 'placeholder'=>'Nombre'),
+      'options'=>
+         array(
+               'showAnim'=>'fold',
+               'select'=>'js:function(event, ui) 
+                { $(".Client_name").val(ui.item["name"]); 
+		  $("#Client_comercial_name").val(ui.item["comercial_name"]);
+		  $("#Client_id").val(ui.item["id"]);  
+		  }',
+                 
+                ),
+      'cssFile'=>true,
+   )); ?>
 
-<?php echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button btn')); ?>
+
+    	<input class="form-control" placeholder="Nombre comercial" disabled="true" name="Client[comercial_name]" id="Client_comercial_name" type="text">
+    		<input class="form-control" placeholder="Número de Cliente" disabled="true" name="Client[id]" id="Client_id" type="text">
+<h2>Buscar orden de trabajo</h2>
+ <?php //echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 	<?php $this->renderPartial('_search',array(
-	'model'=>$model,
+	'model'=>$model,'model_client'=>$model_client,
 )); ?>
 </div><!-- search-form -->
 
@@ -50,10 +73,10 @@ return false;
 		
 	//	'fail',
 	//	'warranty',
-		/*
-		'status_id',
-		'adicional',
-		*/
+		'date',	
+	//	'status_id',
+		//'adicional',
+		
 array(
 'class'=>'booster.widgets.TbButtonColumn',
 ),

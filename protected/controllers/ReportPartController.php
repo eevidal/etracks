@@ -27,12 +27,12 @@ class ReportPartController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
+// 			array('allow',  // allow all users to perform 'index' and 'view' actions
+// 				'actions'=>array('index','view'),
+// 				'users'=>array('*'),
+// 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'PartAutocomplete'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -71,9 +71,18 @@ class ReportPartController extends Controller
 		if(isset($_POST['ReportPart']))
 		{
 			$model->attributes=$_POST['ReportPart'];
+	
+// 			$part_id=$model->part_id;
+// 			$model_part=Part::model()->findByPk($part_id);
+// 			$stock=$model_part->stock;
+// 			$model_part->stock= $stock - $model->quantity;
 			
+			//$model_part->stock= $stock - $model->quantity;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				//$model_part->save();
+				$this->redirect(array('report/update','id'=>$model_report->id));
+			}	
 		}
 
 		$this->render('create',array(
@@ -91,7 +100,8 @@ class ReportPartController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		
+		$model_part=Part::model()->findByPk($model->part_id);
+		$model_report=Part::model()->findByPk($model->report_id);
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -99,11 +109,12 @@ class ReportPartController extends Controller
 		{
 			$model->attributes=$_POST['ReportPart'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('report/update','id'=>$model->report_id));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+			'model_part'=>$model_part,
 		));
 	}
 
@@ -175,5 +186,36 @@ class ReportPartController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	
+		public function actionPartAutocomplete () {
+		if (isset($_GET['term'])) {
+			$criteria=new CDbCriteria;
+			//$criteria->alias = "clients";
+			//$criteria->condition = "clients.name like '" . $_GET['term'] . "%'";
+			$criteria->condition ="LOWER(name) like LOWER(:term) or LOWER(description) like LOWER(:term)";
+			$criteria->params = array(':term'=> '%'.$_GET['term'].'%');
+			//$dataProvider = new CActiveDataProvider(get_class(Client::model()), array('criteria'=>$criteria,‘pagination’=>false,));
+			//$clients = $dataProvider->getData();
+			$parts = Part::model()->findAll($criteria);
+			$return_array = array();
+		
+			foreach($parts as $part) {
+				$return_array[] = array(
+					'label'=>$part->name,
+					'value'=>$part->name,
+					'id'=>$part->id,
+					'description'=>$part->description,
+					'stock'=>$part->stock,
+					'name'=>$part->name,
+					
+
+					
+					);
+			}
+ 
+			echo CJSON::encode($return_array);
+		} 
 	}
 }
