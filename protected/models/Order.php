@@ -44,11 +44,11 @@ class Order extends CActiveRecord
 			array('warranty, adicional', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, date, equipment_id, client_id, fail, warranty, status_id, adicional', 'safe', 'on'=>'search'),
+			array('id, date, equipment_id, client_id, fail, warranty, status_id, adicional','observation', 'safe', 'on'=>'search'),
 		);
 	}
 
-	/**
+	/** 
 	 * @return array relational rules.
 	 */
 	public function relations()
