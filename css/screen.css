@@ -261,7 +261,8 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 #Part_description {width:360px;margin-bottom:0.5em;}
 #Part_stock {width:100px;margin-bottom:0.5em;}
 #ReportPart_quantity {width:70px;}
-#marcas{background:url('../images/marcas.pdf.jpg'); 
+#marcas{
+/* background:url('../images/marcas.pdf.jpg');  */
 	height:31px;
 /*  	width:670px;   */
 	filter: alpha(opacity=40);
@@ -272,11 +273,11 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 
 } 
 #logo1 {
-	height:124px;
-	width:432px; 
+/*	height:124px;
+	width:432px; */
 /* 	background:url('../images/header.pdf.jpg');  */
-	float:right;
-	padding-top: 5px;
-	
-	
+/* 	float:right; */
+/* 	padding-top: 5px; */
 }
+
+

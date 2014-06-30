@@ -25,7 +25,8 @@
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?>
+		: Sistema de seguimiento de reparación de equipos</div>
 		<div id="logo1"></div>
 	</div><!-- header -->
 
@@ -58,7 +59,7 @@
 
 	<div class="clear"></div>
 	<div id="footer"></div>
-	<div id="marcas">.</div>
+	<div id="marcas"></div>
 	<div id="footer">
  		Copyright &copy; <?php echo date('Y'); ?> by Erica Vidal.
 		All Rights Reserved.<br/> 

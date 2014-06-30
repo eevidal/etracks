@@ -13,6 +13,7 @@ Yii::setPathOfAlias('booster', dirname(__FILE__).'/../extensions/booster');
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Etracks',
+	
 	'language' => 'es_ar',
 
 	// preloading 'log' component

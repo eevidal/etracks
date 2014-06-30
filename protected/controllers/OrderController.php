@@ -32,7 +32,7 @@ class OrderController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'ClientAutocomplete', 'EquipmentAutocomplete','Pdf','change'  ),
+				'actions'=>array('create','update', 'ClientAutocomplete', 'EquipmentAutocomplete','Pdf','change'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -335,8 +335,7 @@ class OrderController extends Controller
 		echo CJSON::encode($return_array);
 	}	
 	
-	
-	
+
 	
 	 public function actionPdf($id)
 	{

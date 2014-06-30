@@ -119,6 +119,33 @@ class Order extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Order the static model class
 	 */
+	 
+		
+	public function SearchByStatus($status) {
+		
+		$criteria=new CDbCriteria;
+		$criteria->compare('status_id',$status);
+		$orders = Order::model()->findAll($criteria); 
+		
+	//	if (!empty($orders)) {
+			$return_array[]=array();
+			foreach($orders as $order) {
+				$return_array[] = array(
+					'id'=>$order->id,
+					'client'=>$order->client->name,
+					'equipment'=>$order->equipment->name,
+					'date'=>$order->date,
+					);
+			}
+			
+		return $return_array;
+	//	}
+	//		else return NULL;
+// 		return new CActiveDataProvider($this, array(
+// 			'criteria'=>$criteria,
+// 		));
+	}	 
+	 
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
