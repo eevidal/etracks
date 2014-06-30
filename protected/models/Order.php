@@ -108,7 +108,7 @@ class Order extends CActiveRecord
 		$criteria->compare('warranty',$this->warranty);
 		$criteria->compare('status_id',$this->status_id);
 		$criteria->compare('adicional',$this->adicional,true);
-		$criteria->compare('observation',$this->adicional,true);
+		$criteria->compare('observation',$this->observation,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
