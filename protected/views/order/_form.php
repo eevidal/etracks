@@ -114,6 +114,7 @@ $status <- Status::model()->findAll($criter);*/
 	<?php echo $form->checkBoxGroup($model,'warranty'); ?>
 <br>	
 	<?php echo $form->textAreaGroup($model,'adicional',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+	<?php echo $form->textAreaGroup($model,'observation',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
 </div>	
 <br>	
