@@ -54,5 +54,6 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		array('label'=>'Garantía', 'value'=>$gar[$model->warranty]),
 		array('label'=>'Estado', 'value'=>$model->status->name),
 		'adicional',
+		'observation',
 	),
 )); ?>
