@@ -27,6 +27,6 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('status_id')); ?>:</b>
 	<?php echo CHtml::encode($data->status->name); ?>
 	<br />
-
-
+		<b><?php echo CHtml::encode($data->getAttributeLabel('observation')); ?>:</b>
+	<?php echo CHtml::encode($data->observation); ?>
 </div>

@@ -78,6 +78,7 @@ class Order extends CActiveRecord
 			'warranty' => 'Garantía',
 			'status_id' => 'Estado',
 			'adicional' => 'Adicionales (accesorios/cartucho/partes)',
+			'observation'=>'Observaciones',
 		);
 	}
 

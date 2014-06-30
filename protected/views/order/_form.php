@@ -11,7 +11,7 @@ $criter->order = 'name ASC';
 $status <- Status::model()->findAll($criter);*/
 ?>
 
-	<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+	<p class="help-block">Los campos con <span class="required">*</span> son necesarios.</p>
 
 	<?php echo $form->errorSummary($model,$model_cli,$model_equi); ?>
 
@@ -61,8 +61,8 @@ $status <- Status::model()->findAll($criter);*/
    )); ?>
 
 
-        <?php echo $form->textFieldGroup($model_cli,'comercial_name',array('class'=>'span8')); ?>
-        <?php echo $form->textFieldGroup($model_cli,'address1',array('class'=>'span5','maxlength'=>128)); ?>
+        <?php echo $form->textFieldGroup($model_cli,'comercial_name',array('class'=>'span8')); ?><span class="required">*</span>
+        <?php echo $form->textFieldGroup($model_cli,'address1',array('class'=>'span5','maxlength'=>128)); ?><span class="required">*</span>
         <?php echo $form->textFieldGroup($model_cli,'address2',array('class'=>'span5')); ?>
         <?php echo $form->textFieldGroup($model_cli,'city',array('class'=>'span5','maxlength'=>128)); ?>
         <?php echo $form->textFieldGroup($model_cli,'postal_code',array('class'=>'input-large')); ?>     
@@ -107,9 +107,9 @@ $status <- Status::model()->findAll($criter);*/
    
 
    
-     <?php echo $form->textFieldGroup($model_equi,'name',array('class'=>'span5')); ?>
+     <?php echo $form->textFieldGroup($model_equi,'name',array('class'=>'span5')); ?><span class="required">*</span>
 <br>
-	<?php echo $form->textAreaGroup($model,'fail',array('class'=>'span8')); ?>
+	<?php echo $form->textAreaGroup($model,'fail',array('class'=>'span8')); ?><span class="required">*</span>
 
 	<?php echo $form->checkBoxGroup($model,'warranty'); ?>
 <br>	

@@ -108,7 +108,7 @@ class OrderController extends Controller
 			else
 			{
 				$model_cli->attributes=$_POST['Client'];
-				var_dump($model_cli);
+				//:wvar_dump($model_cli);
 				if($model_cli->save())
 					$model->client_id=$model_cli->id;
 			}
