@@ -12,20 +12,20 @@
  * @property boolean $warranty
  * @property integer $status_id
  * @property string $adicional
+ * @property string $observation
  *
  * The followings are the available model relations:
- * @property Report[] $reports
  * @property Client $client
  * @property Equipment $equipment
  * @property Status $status
  * @property Tracker[] $trackers
+ * @property Report[] $reports
  */
 class Order extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
-		
 	public function tableName()
 	{
 		return 'order';
@@ -41,14 +41,14 @@ class Order extends CActiveRecord
 		return array(
 			array('date, equipment_id, client_id, fail, status_id', 'required'),
 			array('equipment_id, client_id, status_id', 'numerical', 'integerOnly'=>true),
-			array('warranty, adicional', 'safe'),
+			array('warranty, adicional, observation', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, date, equipment_id, client_id, fail, warranty, status_id, adicional','observation', 'safe', 'on'=>'search'),
+			array('id, date, equipment_id, client_id, fail, warranty, status_id, adicional, observation', 'safe', 'on'=>'search'),
 		);
 	}
 
-	/** 
+	/**
 	 * @return array relational rules.
 	 */
 	public function relations()
@@ -56,11 +56,11 @@ class Order extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-		//	'report' => array(self::BELONGS_TO, 'Report', 'order_id'),
 			'client' => array(self::BELONGS_TO, 'Client', 'client_id'),
 			'equipment' => array(self::BELONGS_TO, 'Equipment', 'equipment_id'),
 			'status' => array(self::BELONGS_TO, 'Status', 'status_id'),
 			'trackers' => array(self::HAS_MANY, 'Tracker', 'order_id'),
+			'reports' => array(self::HAS_MANY, 'Report', 'order_id'),
 		);
 	}
 
@@ -70,15 +70,24 @@ class Order extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Número de Orden',
-			'date' => 'Fecha de ingreso',
-			'equipment_id' => 'Equipo',
-			'client_id' => 'Cliente',
-			'fail' => 'Falla comunicada',
-			'warranty' => 'Garantía',
-			'status_id' => 'Estado',
-			'adicional' => 'Adicionales (accesorios/cartucho/partes)',
-			'observation'=>'Observaciones',
+// 			'id' => 'ID',
+// 			'date' => 'Date',
+// 			'equipment_id' => 'Equipment',
+// 			'client_id' => 'Client',
+// 			'fail' => 'Fail',
+// 			'warranty' => 'Warranty',
+// 			'status_id' => 'Status',
+// 			'adicional' => 'Adicional',
+// 			'observation' => 'Observation',
+			'id' => 'Número de Orden',//'ID',
+			'date' => 'Fecha de ingreso',//'Date',
+			'equipment_id' => 'Equipo',//'Equipment',
+			'client_id' => 'Cliente',//'Client',
+			'fail' => 'Falla comunicada',//'Fail',
+			'warranty' => 'Garantía',//'Warranty',
+			'status_id' => 'Estado',//'Status',
+			'adicional' => 'Adicionales (accesorios/cartucho/partes)',//'Adicional',
+			'observation' => 'Observaciones',//'Observation',
 		);
 	}
 
@@ -115,14 +124,7 @@ class Order extends CActiveRecord
 		));
 	}
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Order the static model class
-	 */
-	 
-		
+	
 	public function SearchByStatus($status) {
 		
 		$criteria=new CDbCriteria;
@@ -146,11 +148,15 @@ class Order extends CActiveRecord
 // 		return new CActiveDataProvider($this, array(
 // 			'criteria'=>$criteria,
 // 		));
-	}	 
-	 
+	}	
+	/**
+	 * Returns the static model of the specified AR class.
+	 * Please note that you should have this exact method in all your CActiveRecord descendants!
+	 * @param string $className active record class name.
+	 * @return Order the static model class
+	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
-		
 }

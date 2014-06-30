@@ -26,7 +26,7 @@ $status <- Status::model()->findAll($criter);*/
 <br>	
 	<?php echo $form->textAreaGroup($model,'adicional',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
-  <?php echo $form->textAreaGroup($model,'observation',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+  <?php echo $form->textAreaGroup($model,'observation',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?> 
 <br>	
 	
 
