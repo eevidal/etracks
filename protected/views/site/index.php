@@ -73,6 +73,7 @@ $this->pageTitle=Yii::app()->name;
 			<td>".$order["id"]."</td>
 			<td>".$order["client"]."</td>
 			<td>".$order["equipment"]."</td>
+			<td>".$order["technician"]."</td>
 			<td>".$order["date"]."</td>
 			<td class='button-column'> <a class='update'  data-toggle='tooltip'
 				href='/etracks/index.php?r=order/view&id=".$order['id']."'data-original-title='Ver'>
@@ -109,6 +110,7 @@ $this->pageTitle=Yii::app()->name;
 			<td>".$order["id"]."</td>
 			<td>".$order["client"]."</td>
 			<td>".$order["equipment"]."</td>
+			<td>".$order["technician"]."</td>
 			<td>".$order["date"]."</td>
 			<td class='button-column'> <a class='update'  data-toggle='tooltip'
 				href='/etracks/index.php?r=order/view&id=".$order['id']."'data-original-title='Ver'>
@@ -144,6 +146,7 @@ $this->pageTitle=Yii::app()->name;
 			<td>".$order["id"]."</td>
 			<td>".$order["client"]."</td>
 			<td>".$order["equipment"]."</td>
+			<td>".$order["technician"]."</td>
 			<td>".$order["date"]."</td>
 			<td class='button-column'> <a class='update'  data-toggle='tooltip'
 				href='/etracks/index.php?r=order/view&id=".$order['id']."'data-original-title='Ver'>

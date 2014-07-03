@@ -20,8 +20,8 @@ array('label'=>'Manage Tracker','url'=>array('admin')),
 'attributes'=>array(
 		'id',
 		'date',
-		'user_id',
-		'staus',
+		'technician',
 		'order_id',
+		'status_id',
 ),
 )); ?>

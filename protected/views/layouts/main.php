@@ -35,7 +35,7 @@
 			'items'=>array(
 				array('label'=>'Inicio', 'url'=>array('/site/index')),
 				  array('label'=>'Ordenes', 'url'=>array('/order')),
-				   array('label'=>'Informes', 'url'=>array('/report')),
+// 				   array('label'=>'Informes', 'url'=>array('/report')),
 				  array('label'=>'Clientes', 'url'=>array('/client')),
 				 array('label'=>'Equipos', 'url'=>array('/equipment')),
 				  array('label'=>'Stock', 'url'=>array('/part/admin')),

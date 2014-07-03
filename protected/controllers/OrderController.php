@@ -71,6 +71,7 @@ class OrderController extends Controller
 		$model=new Order;
 		$model_cli = new Client;
 		$model_equi = new Equipment;
+		
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -79,7 +80,7 @@ class OrderController extends Controller
 		{	
 			
 			$model->attributes=$_POST['Order'];
-			$model->date=date("Y/m/d",time());
+			$model->date=date("Y/m/d H:i:s",time());
 			
 			if(!empty($_POST['Equipment']['id']))
 			{
@@ -114,6 +115,7 @@ class OrderController extends Controller
 			}
 				
 			$model->status_id='2';
+			
 		//	var_dump($model_cli);
 		//	var_dump($model->attributes);
 			if($model->save())
@@ -156,7 +158,16 @@ class OrderController extends Controller
 	{
 		$model=$this->loadModel($id);
 		$model_status=new Status;
+		$model_tracker=new Tracker;
 		
+		$criteria=new CDbCriteria;
+		$criteria->condition ="order_id = '$id'";
+		$model_report=Report::model()->findAll($criteria);
+		
+		
+		$iid=$model_report[0]->id;	
+		$criteria->condition ="report_id = '$iid'";
+		$model_part_report=ReportPart::model()->findAll($criteria);
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -165,12 +176,35 @@ class OrderController extends Controller
 			$model->attributes=$_POST['Order'];
 			PC::debug('Short way to debug directly in PHP Console', 'some,debug,tags');
 			if($model->save())
+			{
+				//Stock
+				if($model->status_id=='7')
+				{
+					foreach($model_part_report as $m)
+					{
+						$part_id=$m->part_id;
+						$model_part=Part::model()->findByPk($part_id);
+						$stock=$model_part->stock;
+						$model_part->stock= $stock - $m->quantity;
+						$model_part->save();
+					}
+				}
+				// Tracker record		
+				$model_tracker->attributes=$_POST['Tracker'];
+				$model_tracker->date = date("Y/m/d",time());
+				$model_tracker->time = date("H:i:s",time());
+				$model_tracker->status_id=$model->status_id;
+				$model_tracker->order_id = $model->id;
+				$model_tracker->save();
+				
 				$this->redirect(array('view','id'=>$model->id));
+			}	
 		}
 
 		$this->render('change',array(
 			'model'=>$model,
 			'model_status'=>$model_status,
+			'model_tracker'=>$model_tracker,
 		));
 	}
 

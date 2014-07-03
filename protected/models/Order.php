@@ -134,12 +134,27 @@ class Order extends CActiveRecord
 	//	if (!empty($orders)) {
 			$return_array[]=array();
 			foreach($orders as $order) {
+				$criteria=new CDbCriteria;
+				$criteria->condition ="order_id = '$order->id'";
+				$rep=Report::model()->findAll($criteria);
+				if(!empty($rep[0]) ){
 				$return_array[] = array(
 					'id'=>$order->id,
 					'client'=>$order->client->name,
 					'equipment'=>$order->equipment->name,
+					 'technician'=>$rep[0]->technician,
 					'date'=>$order->date,
 					);
+				}
+				else {
+				$return_array[] = array(
+					'id'=>$order->id,
+					'client'=>$order->client->name,
+					'equipment'=>$order->equipment->name,
+					
+					'date'=>$order->date,
+					);
+				}
 			}
 			
 		return $return_array;

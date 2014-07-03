@@ -8,16 +8,16 @@
 	<?php echo CHtml::encode($data->date); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('user_id')); ?>:</b>
-	<?php echo CHtml::encode($data->user_id); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('staus')); ?>:</b>
-	<?php echo CHtml::encode($data->staus); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('technician')); ?>:</b>
+	<?php echo CHtml::encode($data->technician); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('order_id')); ?>:</b>
 	<?php echo CHtml::encode($data->order_id); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('status_id')); ?>:</b>
+	<?php echo CHtml::encode($data->status_id); ?>
 	<br />
 
 

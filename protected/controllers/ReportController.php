@@ -62,10 +62,22 @@ class ReportController extends Controller
 
 		$criteria->condition ="order_id = '$id'";
 		$model=Report::model()->findAll($criteria);
-	
+		$model_order=Order::model()->findByPk($id);
+		$model_client=Client::model()->findByPk($model_order->client->id);
+		$model_equipment=Equipment::model()->findByPk($model_order->equipment->id);
 		//$idd=$model["id"];
+		$criteria=new CDbCriteria;
+		$iid=$model[0]->id;	
+		$criteria->condition ="report_id = '$iid'";
+		$model_part_report=ReportPart::model()->findAll($criteria);
+		$model_part=new Part;
 		$this->render('order_view',array(
 			'model'=>$model[0],
+			'model_order'=>$model_order,
+			'model_equipment'=>$model_equipment,
+			'model_client'=>$model_client,
+			'model_part_report'=>$model_part_report,
+			'model_part'=>$model_part,
 		));
 	}
 	/**
@@ -79,7 +91,7 @@ class ReportController extends Controller
 		$model_cli = Client::model()->findByPk($model_order->client_id);
 		$model_equi =Equipment::model()->findByPk($model_order->equipment_id);
 		$model_part=new Part;
-		
+		$model_tracker=new Tracker;
 		//$model_part_report=new ReportPart;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -107,6 +119,15 @@ class ReportController extends Controller
 				
 				$model_order->status_id='9';
 				$model_order->save();
+				
+				// Tracker record				
+				$model_tracker->date = date("Y/m/d",time());
+				$model_tracker->time = date("H:i:s",time());
+				$model_tracker->technician = $model->technician;
+				$model_tracker->status_id=$model_order->status_id;
+				$model_tracker->order_id = $model->order_id;
+				$model_tracker->save();
+				
 				
 				
  				$this->redirect(array('view','id'=>$model->id));

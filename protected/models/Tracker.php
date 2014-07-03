@@ -1,27 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "report".
+ * This is the model class for table "tracker".
  *
- * The followings are the available columns in table 'report':
+ * The followings are the available columns in table 'tracker':
  * @property integer $id
+ * @property string $date
  * @property string $technician
- * @property string $report
- * @property string $observation
  * @property integer $order_id
+ * @property integer $status_id
+ * @property string $time
  *
  * The followings are the available model relations:
- * @property Part[] $parts
  * @property Order $order
+ * @property Status $status
  */
-class Report extends CActiveRecord
+class Tracker extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'report';
+		return 'tracker';
 	}
 
 	/**
@@ -32,12 +33,12 @@ class Report extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('technician, order_id', 'required'),
-			array('order_id', 'numerical', 'integerOnly'=>true),
-			array('report, observation', 'safe'),
+			array('date, technician', 'required'),
+			array('order_id, status_id', 'numerical', 'integerOnly'=>true),
+			array('time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, technician, report, observation, order_id', 'safe', 'on'=>'search'),
+			array('id, date, technician, order_id, status_id, time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,8 +50,8 @@ class Report extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'parts' => array(self::MANY_MANY, 'Part', 'report_part(report_id, part_id)'),
 			'order' => array(self::BELONGS_TO, 'Order', 'order_id'),
+			'status' => array(self::BELONGS_TO, 'Status', 'status_id'),
 		);
 	}
 
@@ -60,11 +61,19 @@ class Report extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Nº de Informe',
-			'technician' => 'Técnico',
-			'report' => 'Informe',
-			'observation' => 'Observaciones',
-			'order_id' => 'Nº de ingreso',
+// 			'id' => 'ID',
+// 			'date' => 'Date',
+// 			'technician' => 'Technician',
+// 			'order_id' => 'Order',
+// 			'status_id' => 'Status',
+// 			'time' => 'Time',
+			'id' => 'ID',
+			'date' => 'Fecha','Date',
+			'technician' => 'Técnico','Technician',
+			'order_id' => 'Orden','Order',
+			'status_id' => 'Estado','Status',
+			'time' => 'Hora',
+
 		);
 	}
 
@@ -87,10 +96,11 @@ class Report extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('date',$this->date,true);
 		$criteria->compare('technician',$this->technician,true);
-		$criteria->compare('report',$this->report,true);
-		$criteria->compare('observation',$this->observation,true);
 		$criteria->compare('order_id',$this->order_id);
+		$criteria->compare('status_id',$this->status_id);
+		$criteria->compare('time',$this->time,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -101,7 +111,7 @@ class Report extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Report the static model class
+	 * @return Tracker the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

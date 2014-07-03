@@ -14,4 +14,4 @@ $this->menu=array(
 );
 ?>
 
-<?php echo $this->renderPartial('_change',array('model'=>$model, 'model_status'=>$model_status)); ?>
+<?php echo $this->renderPartial('_change',array('model'=>$model, 'model_status'=>$model_status, 'model_tracker'=>$model_tracker)); ?>

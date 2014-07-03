@@ -45,9 +45,9 @@ return false;
 'columns'=>array(
 		'id',
 		'date',
-		'user_id',
-		'staus',
+		'technician',
 		'order_id',
+		'status_id',
 array(
 'class'=>'booster.widgets.TbButtonColumn',
 ),

@@ -59,10 +59,11 @@ $status <- Status::model()->findAll($criter);*/
                 ),
       'cssFile'=>true,
    )); ?>
-
+   
+<span class="required">*</span>
 
         <?php echo $form->textFieldGroup($model_cli,'comercial_name',array('class'=>'span8')); ?><span class="required">*</span>
-        <?php echo $form->textFieldGroup($model_cli,'address1',array('class'=>'span5','maxlength'=>128)); ?><span class="required">*</span>
+        <?php echo $form->textFieldGroup($model_cli,'address1',array('class'=>'span5','maxlength'=>128)); ?>
         <?php echo $form->textFieldGroup($model_cli,'address2',array('class'=>'span5')); ?>
         <?php echo $form->textFieldGroup($model_cli,'city',array('class'=>'span5','maxlength'=>128)); ?>
         <?php echo $form->textFieldGroup($model_cli,'postal_code',array('class'=>'input-large')); ?>     
@@ -105,7 +106,7 @@ $status <- Status::model()->findAll($criter);*/
       'cssFile'=>true,
    )); ?>
    
-
+<span class="required">*</span>
    
      <?php echo $form->textFieldGroup($model_equi,'name',array('class'=>'span5')); ?><span class="required">*</span>
 <br>

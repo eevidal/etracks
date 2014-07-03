@@ -32,7 +32,7 @@ class ReportPartController extends Controller
 // 				'users'=>array('*'),
 // 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'PartAutocomplete'),
+				'actions'=>array('create','update', 'PartAutocomplete', 'MultipleCreate', 'multiple_create'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -92,6 +92,37 @@ class ReportPartController extends Controller
 		));
 	}
 
+	public function actionMultipleCreate( $report_id)
+	{
+		$model=new ReportPart;
+		$model_part=new Part;
+		$model_report=Report::model()->findByPk($report_id);
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Part']))
+		{
+			
+			$parts= $_POST['Part'];	
+			foreach($parts as $part) 
+			{	
+				$model_part_report=new ReportPart;
+				$model_part_report->part_id=$part;
+				$model_part_report->report_id=$model_report->id;
+				$model_part_report->quantity=1;
+				$model_part_report->save();
+			}
+
+			$this->redirect(array('report/update','id'=>$model_report->id));
+
+		}
+
+		$this->render('multiple_create',array(
+			'model'=>$model,
+			'model_part'=>$model_part,
+			'model_report'=>$model_report,
+		));
+	}	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.

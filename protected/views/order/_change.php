@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 <?php
 
-$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+$form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'horizontal',
 	// 'type' => 'inline',
 //	'htmlOptions' => array('class' => 'well'),
@@ -52,7 +52,9 @@ $data=$model;
 	<br />
 <br>
 <div class="panel panel-info">
+	
 <div class="panel-heading">
+<?php echo $form->textFieldGroup($model_tracker,'technician',array('class'=>'span8')); ?>
 <h3>Nuevo estado</h3>
 
 <?php echo $form->dropDownList($model,'status_id', CHtml::listData(Status::model()->findAll(), 'id', 'name')); ?>
@@ -72,6 +74,7 @@ $data=$model;
 </div>
 
 <div class="panel panel-danger">
+
   <div class="panel-heading">
     <h3 class="panel-title">
 	<i class='glyphicon glyphicon-exclamation-sign'></i>

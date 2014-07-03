@@ -7,7 +7,8 @@ $this->breadcrumbs=array(
 
 	$this->menu=array(
 	array('label'=>'Listar Informes','url'=>array('index')),
-	array('label'=>'Agregar partes','url'=>array('reportPart/create', 'report_id'=>$model->id)),
+	array('label'=>'Agregar una parte','url'=>array('reportPart/create', 'report_id'=>$model->id)),
+	array('label'=>'Agregar partes','url'=>array('reportPart/MultipleCreate', 'report_id'=>$model->id)),
 	array('label'=>'Ver Informe','url'=>array('view','id'=>$model->id)),
 	array('label'=>'Administrar/buscar Informe','url'=>array('admin')),
 	);
