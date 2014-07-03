@@ -20,5 +20,9 @@
 	<?php echo CHtml::encode($data->status_id); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('time')); ?>:</b>
+	<?php echo CHtml::encode($data->time); ?>
+	<br />
+
 
 </div>

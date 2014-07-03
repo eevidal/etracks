@@ -23,5 +23,6 @@ array('label'=>'Manage Tracker','url'=>array('admin')),
 		'technician',
 		'order_id',
 		'status_id',
+		'time',
 ),
 )); ?>
