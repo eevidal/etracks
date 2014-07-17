@@ -4,7 +4,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
  	
-<h2 >Informe técnico <?php echo $form->textFieldGroup($model,'technician',array('class'=>'span5')); ?></h2>
+<h2 >Informe técnico <?php //echo $form->textFieldGroup($model,'technician',array('class'=>'span5')); ?></h2>
 
 
 
@@ -56,6 +56,7 @@
 
 	<?php echo $form->textAreaGroup($model,'report',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
+	
 	<?php echo $form->textFieldGroup($model,'observation',array('class'=>'span5')); ?>
 
 	<?php //echo $form->textFieldGroup($model,'order_id',array('class'=>'span5')); ?>

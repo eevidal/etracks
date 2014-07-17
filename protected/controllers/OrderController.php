@@ -1,6 +1,6 @@
 <?php
 
-class OrderController extends Controller
+class OrderController extends RController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -14,9 +14,12 @@ class OrderController extends Controller
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
-		//	'postOnly + delete', // we only allow deletion via POST request
+			'rights',
 		);
+// 		return array(
+// 			'accessControl', // perform access control for CRUD operations
+// 		//	'postOnly + delete', // we only allow deletion via POST request
+// 		);
 	}
 
 	/**
@@ -28,7 +31,7 @@ class OrderController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','pdf'),
+				'actions'=>array('index','view','pdf','history'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -55,9 +58,12 @@ class OrderController extends Controller
 
 		$criteria->condition ="order_id = '$id'";
 		$model_report=Report::model()->findAll($criteria);
+		$criteria->condition ="id_order = '$id'";
+		$model_budget=Budget::model()->findAll($criteria);
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			'model_report'=>$model_report,
+			'model_budget'=>$model_budget,
 		));
 	}
 
@@ -71,7 +77,7 @@ class OrderController extends Controller
 		$model=new Order;
 		$model_cli = new Client;
 		$model_equi = new Equipment;
-		
+		$model_tracker=new Tracker;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -118,8 +124,20 @@ class OrderController extends Controller
 			
 		//	var_dump($model_cli);
 		//	var_dump($model->attributes);
-			if($model->save())
+			if($model->save()){
+				//$model_tracker->attributes=$_POST['Tracker'];
+				$user =Yii::app()->getModule('user')->user();
+				$profile=$user->profile;
+				$model_tracker->technician=$profile->nickname;
+				$model_tracker->date = date("Y/m/d",time());
+				$model_tracker->time = date("H:i:s",time());
+				$model_tracker->status_id=$model->status_id;
+				$model_tracker->order_id = $model->id;
+				$model_tracker->save();
+								
 				$this->redirect(array('view','id'=>$model->id));
+				
+				}
 		}
 
 		$this->render('create',array(
@@ -190,7 +208,10 @@ class OrderController extends Controller
 					}
 				}
 				// Tracker record		
-				$model_tracker->attributes=$_POST['Tracker'];
+				//$model_tracker->attributes=$_POST['Tracker'];
+				$user =Yii::app()->getModule('user')->user();
+				$profile=$user->profile;
+				$model_tracker->technician =$profile->nickname;
 				$model_tracker->date = date("Y/m/d",time());
 				$model_tracker->time = date("H:i:s",time());
 				$model_tracker->status_id=$model->status_id;
@@ -235,6 +256,14 @@ class OrderController extends Controller
 		));
 	}
 	
+	public function actionHistory()
+	{
+		$model=Order::model();
+		$this->render('history',array(
+			'model'=>$model,
+			));
+	}
+	
 	
 
 	/**
@@ -244,6 +273,7 @@ class OrderController extends Controller
 	{
 		$model=new Order('search');
 		$model_client=new Client('search');
+		$model_equipment=new Equipment('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Order']))
 			$model->attributes=$_GET['Order'];
@@ -251,6 +281,7 @@ class OrderController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 			'model_client'=>$model_client,
+			'model_equipment'=>$model_equipment,
 		));
 	}
 

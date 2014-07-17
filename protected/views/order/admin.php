@@ -30,6 +30,7 @@ return false;
 		&lt;&gt;</b>
 	or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>-->
+<p>Por cliente</p>
 <?php $this->widget('zii.widgets.jui.CJuiAutoComplete',
     array(
       'model'=>$model_client,
@@ -53,6 +54,27 @@ return false;
 
     	<input class="form-control" placeholder="Nombre comercial" disabled="true" name="Client[comercial_name]" id="Client_comercial_name" type="text">
     		<input class="form-control" placeholder="Número de Cliente" disabled="true" name="Client[id]" id="Client_id" type="text">
+ <p>Por equipo</p>   		
+  <?php $this->widget('zii.widgets.jui.CJuiAutoComplete',
+    array(
+      'model'=>$model_equipment,
+      'attribute'=>'serie',
+      'name'=>'Equipment_serie',
+      'source'=>  $this->createUrl('EquipmentAutocomplete'),
+      'htmlOptions'=>array('autocomplete'=>'off', 'placeholder'=>'Serie'),
+      'options'=>
+         array(
+               'showAnim'=>'fold',
+               'select'=>'js:function(event, ui) 
+                { $(".Equipment_serie").val(ui.item["serie"]); 
+		   $("#Equipment_id").val(ui.item["id"]);  
+		  }',
+                 
+                ),
+      'cssFile'=>true,
+   )); ?>  	
+   <input class="form-control" placeholder="Número de Equipo" disabled="true" name="Equipment[id]" id="Equipment_id" type="text">
+   
 <h2>Buscar orden de trabajo</h2>
  <?php //echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
@@ -68,7 +90,7 @@ return false;
 'columns'=>array(
 		'id',
 		//'date',
-		//'equipment_id',
+		'equipment_id',
 		'client_id',
 		
 	//	'fail',

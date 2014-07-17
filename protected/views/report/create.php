@@ -4,10 +4,10 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
-$this->menu=array(
-array('label'=>'Listar Informes','url'=>array('index')),
-array('label'=>'Manage Report','url'=>array('admin')),
-);
+// $this->menu=array(
+// array('label'=>'Listar Informes','url'=>array('index')),
+// array('label'=>'Manage Report','url'=>array('admin')),
+// );
 ?>
 
 

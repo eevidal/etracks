@@ -1,6 +1,6 @@
 <?php
 
-class EquipmentController extends Controller
+class EquipmentController extends RController
 {
 /**
 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -14,8 +14,8 @@ public $layout='//layouts/column2';
 public function filters()
 {
 return array(
-'accessControl', // perform access control for CRUD operations
-);
+			'rights',
+		);
 }
 
 /**

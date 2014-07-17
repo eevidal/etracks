@@ -1,4 +1,10 @@
-<?php /* @var $this Controller */ ?>
+<?php /* @var $this Controller */ 
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,19 +39,27 @@
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Inicio', 'url'=>array('/site/index')),
-				  array('label'=>'Ordenes', 'url'=>array('/order')),
-// 				   array('label'=>'Informes', 'url'=>array('/report')),
-				  array('label'=>'Clientes', 'url'=>array('/client')),
-				 array('label'=>'Equipos', 'url'=>array('/equipment')),
-				  array('label'=>'Stock', 'url'=>array('/part/admin')),
+			array('label'=>'Inicio', 'url'=>array('/site/index')),
+			array('label'=>'Nueva Orden', 'url'=>array('/order/create')),
+			array('label'=>'Buscar Ordenes','url'=>array('/order/admin')),
+			array('label'=>'Historial','url'=>array('/order/history')),
+// 			   array('label'=>'Informes', 'url'=>array('/report')),
+			array('label'=>'Clientes', 'url'=>array('/client')),
+			array('label'=>'Equipos', 'url'=>array('/equipment')),
+			  array('label'=>'Stock', 'url'=>array('/part/admin')),
 
 				//array('label'=>'Acerca de', 'url'=>array('/site/page', 'view'=>'about')),
 				//array('label'=>'Contacto', 'url'=>array('/site/contact')),
 				
 
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				//array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+			//	array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Login"), 'visible'=>Yii::app()->user->isGuest),
+//array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Register"), 'visible'=>Yii::app()->user->isGuest),
+array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
+array('url'=>array('/rights'), 'label'=>'Roles', 'visible'=>Yii::app()->getModule('user')->isAdmin()),
+array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest),
+			
 			),
 		)); ?>
 	</div><!-- mainmenu -->

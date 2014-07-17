@@ -1,36 +1,41 @@
-<?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
+<?php 
+echo "<div class=\"view\">";
+$form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'horizontal',
 	// 'type' => 'inline',
 	'htmlOptions' => array('class' => 'well'),
 	'enableAjaxValidation'=>false,
 )); 
-/*
-$criter = new CDbCriteria;
-$criter->order = 'name ASC';
+echo $form->errorSummary($model);
 
-$status <- Status::model()->findAll($criter);*/
-?>
+	$gar= array('Sí', 'No');
+$this->widget('bootstrap.widgets.TbDetailView',array(
+	'data'=>$model,
+	'attributes'=>array(
+	//	'id',
+		'date',
+		array('label'=>'Equipo', 'value'=>$model->equipment->name),
+		array('label'=>'Cliente', 'value'=>$model->client->name),
+		'fail',
+		array('label'=>'Garantía', 'value'=>$gar[$model->warranty]),
+		array('label'=>'Estado', 'value'=>$model->status->name),
+		'adicional',
+		'observation',
+	),
+)); ?>
 
-	<p class="help-block">Fields with <span class="required">*</span> are required.</p>
+</div>
 
-	<?php echo $form->errorSummary($model); ?>
 
-	 <?php echo $form->textFieldGroup($model,'date',array('class'=>'span5')); ?>
 
-       <?php echo $form->textFieldGroup($model,'equipment_id',array('class'=>'span5')); ?>
-	<?php echo $form->textFieldGroup($model,'client_id',array('class'=>'span5')); ?>
-<br>
-	<?php echo $form->textAreaGroup($model,'fail',array('class'=>'span8')); ?>
-
-	<?php echo $form->checkBoxGroup($model,'warranty'); ?>
-<br>	
-	<?php echo $form->textAreaGroup($model,'adicional',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
-
+<h4>Sólo es posible actualizar la siguiente información</h4>
+<div class="view">
+  <?php echo $form->checkBoxGroup($model,'warranty'); ?>
   <?php echo $form->textAreaGroup($model,'observation',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?> 
 <br>	
 	
 
-
+</div>
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(

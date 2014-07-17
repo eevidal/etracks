@@ -15,10 +15,11 @@
  * @property string $observation
  *
  * The followings are the available model relations:
+ * @property Tracker[] $trackers
  * @property Client $client
  * @property Equipment $equipment
  * @property Status $status
- * @property Tracker[] $trackers
+ * @property Budget[] $budgets
  * @property Report[] $reports
  */
 class Order extends CActiveRecord
@@ -56,10 +57,11 @@ class Order extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'trackers' => array(self::HAS_MANY, 'Tracker', 'order_id'),
 			'client' => array(self::BELONGS_TO, 'Client', 'client_id'),
 			'equipment' => array(self::BELONGS_TO, 'Equipment', 'equipment_id'),
 			'status' => array(self::BELONGS_TO, 'Status', 'status_id'),
-			'trackers' => array(self::HAS_MANY, 'Tracker', 'order_id'),
+			'budgets' => array(self::HAS_MANY, 'Budget', 'id_order'),
 			'reports' => array(self::HAS_MANY, 'Report', 'order_id'),
 		);
 	}
@@ -87,7 +89,7 @@ class Order extends CActiveRecord
 			'warranty' => 'Garantía',//'Warranty',
 			'status_id' => 'Estado',//'Status',
 			'adicional' => 'Adicionales (accesorios/cartucho/partes)',//'Adicional',
-			'observation' => 'Observaciones',//'Observation',
+			'observation' => 'Notas sobre la orden',//'Observation',
 		);
 	}
 
@@ -124,7 +126,6 @@ class Order extends CActiveRecord
 		));
 	}
 
-	
 	public function SearchByStatus($status) {
 		
 		$criteria=new CDbCriteria;
@@ -142,7 +143,8 @@ class Order extends CActiveRecord
 					'id'=>$order->id,
 					'client'=>$order->client->name,
 					'equipment'=>$order->equipment->name,
-					 'technician'=>$rep[0]->technician,
+					'technician'=>$rep[0]->technician,
+					'technician2'=>(!empty($rep[1]) )? $rep[1]->technician : "",
 					'date'=>$order->date,
 					);
 				}
@@ -164,6 +166,9 @@ class Order extends CActiveRecord
 // 			'criteria'=>$criteria,
 // 		));
 	}	
+	
+	
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

@@ -1,6 +1,6 @@
 <?php
 
-class ReportController extends Controller
+class ReportController extends RController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -13,9 +13,12 @@ class ReportController extends Controller
 	 */
 	public function filters()
 	{
+// 		return array(
+// 			'accessControl', // perform access control for CRUD operations
+// 			'postOnly + delete', // we only allow deletion via POST request
+// 		);
 		return array(
-			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			'rights',
 		);
 	}
 
@@ -32,7 +35,7 @@ class ReportController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','PartAutocomplete','Pdf', 'OrderView'),
+				'actions'=>array('create','update','PartAutocomplete','Pdf', 'OrderView','TOrderView'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -51,8 +54,13 @@ class ReportController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model=Report::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		$model_order=Order::model()->findByPk($model->order_id);	
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'model_order'=>$model_order,
 		));
 	}
 	
@@ -60,7 +68,7 @@ class ReportController extends Controller
 	{
 		$criteria=new CDbCriteria;
 
-		$criteria->condition ="order_id = '$id'";
+		$criteria->condition ="order_id = '$id' AND type = 0";
 		$model=Report::model()->findAll($criteria);
 		$model_order=Order::model()->findByPk($id);
 		$model_client=Client::model()->findByPk($model_order->client->id);
@@ -80,6 +88,34 @@ class ReportController extends Controller
 			'model_part'=>$model_part,
 		));
 	}
+	
+	public function actionTOrderView($id)
+	{
+		$criteria=new CDbCriteria;
+
+		$criteria->condition ="order_id = '$id' AND type = 1";
+		$model=Report::model()->findAll($criteria);
+		$model_order=Order::model()->findByPk($id);
+		$model_client=Client::model()->findByPk($model_order->client->id);
+		$model_equipment=Equipment::model()->findByPk($model_order->equipment->id);
+		//$idd=$model["id"];
+		$criteria=new CDbCriteria;
+		$iid=$model[0]->id;	
+		$criteria->condition ="report_id = '$iid'";
+		$model_part_report=ReportPart::model()->findAll($criteria);
+		$model_part=new Part;
+		$this->render('order_view',array(
+			'model'=>$model[0],
+			'model_order'=>$model_order,
+			'model_equipment'=>$model_equipment,
+			'model_client'=>$model_client,
+			'model_part_report'=>$model_part_report,
+			'model_part'=>$model_part,
+		));
+	}
+	
+	
+	
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -96,43 +132,97 @@ class ReportController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Report']))
+		if($model_order->status_id==2)
 		{
-			$model->attributes=$_POST['Report'];
-			$model->order_id=$model_order->id;
-			 // change the order status to in revision
- 			if($model->save())
+			if(isset($_POST['Report']))
 			{
-				if(!empty($_POST['Part']))
+				$model->attributes=$_POST['Report'];
+				$model->order_id=$model_order->id;
+				// change the order status to in revision
+				//$user=Yii::app()->controller->module->user();
+				$user =Yii::app()->getModule('user')->user();
+				
+				$profile=$user->profile;
+				$model->technician= $profile->nickname;
+
+				if($model->save())
 				{
-					$parts= $_POST['Part'];	
-					foreach($parts as $part) 
-					{	
-						$model_part_report=new ReportPart;
-						$model_part_report->part_id=$part;
-						$model_part_report->report_id=$model->id;
-						$model_part_report->quantity=1;
-						$model_part_report->save();
+					if(!empty($_POST['Part']))
+					{
+						$parts= $_POST['Part'];	
+						foreach($parts as $part) 
+						{	
+							$model_part_report=new ReportPart;
+							$model_part_report->part_id=$part;
+							$model_part_report->report_id=$model->id;
+							$model_part_report->quantity=1;
+							$model_part_report->save();
+						}
 					}
-				}
 				
-				$model_order->status_id='9';
-				$model_order->save();
+					$model_order->status_id='9';
+					$model_order->save();
+					// Tracker record				
+					$model_tracker->date = date("Y/m/d",time());
+					$model_tracker->time = date("H:i:s",time());
+					$model_tracker->technician = $model->technician;
+					$model_tracker->status_id=$model_order->status_id;
+					$model_tracker->order_id = $model->order_id;
+					$model_tracker->save();
 				
-				// Tracker record				
-				$model_tracker->date = date("Y/m/d",time());
-				$model_tracker->time = date("H:i:s",time());
-				$model_tracker->technician = $model->technician;
-				$model_tracker->status_id=$model_order->status_id;
-				$model_tracker->order_id = $model->order_id;
-				$model_tracker->save();
-				
-				
-				
- 				$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array('view','id'=>$model->id));
+				}	
 			}
  		}
+ 		elseif (in_array($model_order->status_id,array(5,10,11),true))
+ 		{
+			$criteria=new CDbCriteria;
+			$criteria->condition ="order_id = '$id'";
+			$model_pre=Report::model()->findAll($criteria);
+			$idd=$model_pre[0]->id;
+			$criteria->condition ="report_id = '$idd'";
+			$rparts=ReportPart::model()->findAll($criteria);
+			
+			$model->order_id=$model_order->id;
+			$model->type = 1;
+			$model->date = date("Y/m/d",time());
+			$model->report=$model_pre[0]->report;
+			$model->observation=$model_pre[0]->observation;
+			$user =Yii::app()->getModule('user')->user();
+			$profile=$user->profile;
+			$model->technician= $profile->nickname;
+			//$model->technician=$model_pre[0]->technician;
+			if($model->save())
+				{
+					if(!empty($rparts))
+					{
+						
+						foreach($rparts as $part) 
+						{	
+							$model_part_report=new ReportPart;
+							$model_part_report->part_id=$part->part_id;
+							$model_part_report->report_id=$model->id;
+							$model_part_report->quantity=$part->quantity;
+							$model_part_report->type_report=1;
+							$model_part_report->save();
+						}
+					}
+				
+					$model_order->status_id='13';
+					$model_order->save();
+					// Tracker record				
+					$model_tracker->date = date("Y/m/d",time());
+					$model_tracker->time = date("H:i:s",time());
+					$model_tracker->technician = $model->technician;
+					$model_tracker->status_id=$model_order->status_id;
+					$model_tracker->order_id = $model->order_id;
+					$model_tracker->save();
+				
+					$this->redirect(array('view','id'=>$model->id));
+				}	
+			
+ 		} elseif (in_array($model_order->status_id,array(3,4,6,7,8,12,13),true))
+				$this->redirect(array('error','id'=>$model_order->id,'msg'=>'No es posible crear informes en el estado actual de la orden.'));
 		
 		
 

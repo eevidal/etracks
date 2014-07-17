@@ -1,6 +1,6 @@
 <?php
 
-class ReportPartController extends Controller
+class ReportPartController extends RController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -13,9 +13,12 @@ class ReportPartController extends Controller
 	 */
 	public function filters()
 	{
+// 		return array(
+// 			'accessControl', // perform access control for CRUD operations
+// 		//	'postOnly + delete', // we only allow deletion via POST request
+// 		);
 		return array(
-			'accessControl', // perform access control for CRUD operations
-		//	'postOnly + delete', // we only allow deletion via POST request
+			'rights',
 		);
 	}
 
@@ -71,7 +74,7 @@ class ReportPartController extends Controller
 		if(isset($_POST['ReportPart']))
 		{
 			$model->attributes=$_POST['ReportPart'];
-	
+			$model->type_report=$model_report->type;
 // 			$part_id=$model->part_id;
 // 			$model_part=Part::model()->findByPk($part_id);
 // 			$stock=$model_part->stock;

@@ -1,6 +1,6 @@
 <?php
 
-class TrackerController extends Controller
+class TrackerController extends RController
 {
 /**
 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -14,8 +14,8 @@ public $layout='//layouts/column2';
 public function filters()
 {
 return array(
-'accessControl', // perform access control for CRUD operations
-);
+			'rights',
+		);
 }
 
 /**
@@ -43,6 +43,33 @@ array('deny',  // deny all users
 ),
 );
 }
+
+	public function actionOrderView($id)
+	{
+		$criteria=new CDbCriteria;
+
+		$criteria->condition ="order_id = '$id' ";
+		$model=Tracker::model()->findAll($criteria);
+		$model_order=Order::model()->findByPk($id);
+		//$model_client=Client::model()->findByPk($model_order->client->id);
+		//$model_equipment=Equipment::model()->findByPk($model_order->equipment->id);
+		//$idd=$model["id"];
+// 		$criteria=new CDbCriteria;
+// 		$iid=$model[0]->id;	
+// 		$criteria->condition ="report_id = '$iid'";
+// 		$model_part_report=ReportPart::model()->findAll($criteria);
+// 		$model_part=new Part;
+		$this->render('order_view',array(
+			'model'=>$model,
+			'model_order'=>$model_order,
+// 			'model_equipment'=>$model_equipment,
+// 			'model_client'=>$model_client,
+// 			'model_part_report'=>$model_part_report,
+// 			'model_part'=>$model_part,
+		));
+	}
+	
+
 
 /**
 * Displays a particular model.

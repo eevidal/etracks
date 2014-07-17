@@ -5,13 +5,16 @@
  *
  * The followings are the available columns in table 'report':
  * @property integer $id
- * @property string $technician
  * @property string $report
  * @property string $observation
  * @property integer $order_id
+ * @property string $date
+ * @property string $technician
+ * @property integer $type
  *
  * The followings are the available model relations:
- * @property Part[] $parts
+ * @property ReportPart[] $reportParts
+ * @property Budget[] $budgets
  * @property Order $order
  */
 class Report extends CActiveRecord
@@ -32,12 +35,12 @@ class Report extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('technician, order_id', 'required'),
-			array('order_id', 'numerical', 'integerOnly'=>true),
-			array('report, observation', 'safe'),
+			array('order_id, technician', 'required'),
+			array('order_id, type', 'numerical', 'integerOnly'=>true),
+			array('report, observation, date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, technician, report, observation, order_id', 'safe', 'on'=>'search'),
+			array('id, report, observation, order_id, date, technician, type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,7 +52,8 @@ class Report extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'parts' => array(self::MANY_MANY, 'Part', 'report_part(report_id, part_id)'),
+			'reportParts' => array(self::HAS_MANY, 'ReportPart', 'report_id'),
+			'budgets' => array(self::HAS_MANY, 'Budget', 'id_report'),
 			'order' => array(self::BELONGS_TO, 'Order', 'order_id'),
 		);
 	}
@@ -60,10 +64,17 @@ class Report extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+// 			'id' => 'ID',
+// 			'report' => 'Report',
+// 			'observation' => 'Observation',
+// 			'order_id' => 'Order',
+// 			'date' => 'Date',
+// 			'technician' => 'Technician',
+			'type' => 'Tipo',
 			'id' => 'Nº de Informe',
 			'technician' => 'Técnico',
 			'report' => 'Informe',
-			'observation' => 'Observaciones',
+			'observation' => 'Notas sobre la reparación/equipo',
 			'order_id' => 'Nº de ingreso',
 		);
 	}
@@ -87,10 +98,12 @@ class Report extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('technician',$this->technician,true);
 		$criteria->compare('report',$this->report,true);
 		$criteria->compare('observation',$this->observation,true);
 		$criteria->compare('order_id',$this->order_id);
+		$criteria->compare('date',$this->date,true);
+		$criteria->compare('technician',$this->technician,true);
+		$criteria->compare('type',$this->type);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Listar Informes','url'=>array('index')),
+//array('label'=>'Listar Informes','url'=>array('index')),
 //array('label'=>'Create Report','url'=>array('create')),
 );
 
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>BUscar Informes</h1>
+<h1>Buscar Informes</h1>
 
 
 

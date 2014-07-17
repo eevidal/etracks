@@ -4,7 +4,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
  	
-<h2 >Informe técnico <?php echo $form->textFieldGroup($model,'technician',array('class'=>'span5')); ?></h2>
+<h2 >Informe técnico <?php //echo $form->textFieldGroup($model,'technician',array('class'=>'span5')); ?></h2>
 
 
 

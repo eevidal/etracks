@@ -8,6 +8,7 @@
  * @property integer $report_id
  * @property integer $quantity
  * @property integer $id
+ * @property integer $type_report
  *
  * The followings are the available model relations:
  * @property Part $part
@@ -32,10 +33,10 @@ class ReportPart extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('part_id, report_id, quantity', 'required'),
-			array('part_id, report_id, quantity', 'numerical', 'integerOnly'=>true),
+			array('part_id, report_id, quantity, type_report', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('part_id, report_id, quantity, id', 'safe', 'on'=>'search'),
+			array('part_id, report_id, quantity, id, type_report', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,10 +59,11 @@ class ReportPart extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'part_id' => 'Parte',
-			'report_id' => 'Nº Informe',
-			'quantity' => 'Cantidad',
+			'part_id' => 'Part',
+			'report_id' => 'Report',
+			'quantity' => 'Quantity',
 			'id' => 'ID',
+			'type_report' => 'Type Report',
 		);
 	}
 
@@ -87,6 +89,7 @@ class ReportPart extends CActiveRecord
 		$criteria->compare('report_id',$this->report_id);
 		$criteria->compare('quantity',$this->quantity);
 		$criteria->compare('id',$this->id);
+		$criteria->compare('type_report',$this->type_report);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

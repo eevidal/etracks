@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Ordenes de trabajo','url'=>array('index')),
-	array('label'=>'Administrar/Buscar Ordenes','url'=>array('admin')),
+// 	array('label'=>'Listar Ordenes de trabajo','url'=>array('index')),
+// 	array('label'=>'Administrar/Buscar Ordenes','url'=>array('admin')),
 );
 ?>
 
