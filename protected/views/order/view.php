@@ -17,6 +17,7 @@ switch ($model['status_id'])
 		$this->menu=array(
 		array('label'=>'Actualizar Orden','url'=>array('update','id'=>$model->id)),
 		array('label'=>'Crear Informe de presupuesto','url'=>array('report/create','id'=>$model->id)),
+		array('label'=>'Imprimir Orden','url'=>array('pdf','id'=>$model->id)),
 		array('label'=>'-----------------------'),
 		array('label'=>'Registro de actividad','url'=>array('tracker/OrderView','id'=>$model->id)),
 		
@@ -28,9 +29,9 @@ switch ($model['status_id'])
 	{
 		$this->menu=array(
 		array('label'=>'Actualizar Orden','url'=>array('update','id'=>$model->id)),
+		array( 'label'=>  'Crear presupuesto' ,'url'=>array( 'budget/create' ,'id'=>$model_report[0]->id)) , 
 		array('label'=>'Imprimir Orden','url'=>array('pdf','id'=>$model->id)),
 		array('label'=>'Ver Informe de presupuesto','url'=>array('report/OrderView','id'=>$model->id)),
-		array( 'label'=>   'Crear presupuesto' ,'url'=>array( 'budget/create' ,'id'=>$model_report[0]->id)) , 
 //	array('label'=>'Delete Order','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 		array('label'=>'-----------------------'),
 		array('label'=>'Registro de actividad','url'=>array('tracker/OrderView','id'=>$model->id)),		
