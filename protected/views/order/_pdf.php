@@ -84,6 +84,13 @@ body,p,div{
 #contract{ 
 	border: 1px solid #A4A4A4;
 	border-radius: 25px;
+}
+
+#info{
+	border: 1px solid #A4A4A4;
+	border-radius: 25px;
+	height: 200px;
+	padding:20px;
 } 
 
 #observaciones{ 
@@ -115,6 +122,15 @@ body,p,div{
 /*     width: 40%; */
 } 
 
+
+.info{
+	border:1px;
+	height:18px;
+	margin:0px;
+	padding-bottom:0px;	
+
+
+}
 
 .logo{ 
 	padding: 5px;
@@ -471,7 +487,7 @@ facultado para disponer del mismo, perdiendo el cliente todo derecho a reclamo o
 
 </page>
 
-<!--<page>
+<page>
 
 <br/>
 <br/>
@@ -506,5 +522,40 @@ facultado para disponer del mismo, perdiendo el cliente todo derecho a reclamo o
 		<b><?php echo CHtml::encode($data->getAttributeLabel('adicional')); ?>:</b>
 	<?php echo CHtml::encode($data->adicional); ?>
 	<br>
-</div>	
-</page>-->
+</div>
+<br>
+<div id="info">
+<h3>Informe:</h3>
+</div>
+<br>
+<table style="border:1px ;">
+<tr style="border:1px;"><td>
+<div style="width:200px; ">
+N° PARTE</div></td>
+<td><div style="width:100px;">CANT.</div></td>
+
+<td><div height style="width:410px;">DESCRIPCIÓN</div></td>
+</tr>
+
+<?php
+
+for($i=0;$i<11;$i++){
+		echo "<tr ><td>
+			<div class='info'></div></td>
+		<td><div class='info'></div></td>
+		<td><div class='info'></div></td>
+		</tr>";
+
+}
+
+?>
+</table>
+<br>
+<h4>Tecnico:.................................... 
+Obsevaciones...................................
+Contador...............................
+</h4>
+<h5>Hora inicio:................... Hora de Fin:...........................</h5>
+	
+</page>
+
