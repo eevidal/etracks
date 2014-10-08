@@ -52,7 +52,8 @@
 <h4 >Informe </h4>
 <?php echo $form->errorSummary($model); ?>
 
-	
+	<h5>Contador
+	<?php echo $form->textFieldGroup($model,'count',array('class'=>'span5')); ?></h5>
 
 	<?php echo $form->textAreaGroup($model,'report',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 

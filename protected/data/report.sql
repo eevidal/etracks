@@ -26,7 +26,8 @@ CREATE TABLE report (
     order_id integer NOT NULL,
     date date DEFAULT now(),
     technician character varying NOT NULL,
-    type integer DEFAULT 0 NOT NULL
+    type integer DEFAULT 0 NOT NULL,
+    count integer DEFAULT 0 NOT NULL
 );
 
 

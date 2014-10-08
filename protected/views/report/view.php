@@ -63,6 +63,7 @@ switch ($model_order['status_id'])
 		'technician',
 		'report',
 		'observation',
+		'count',
 		array('label'=>'Order', 'value'=>$model->order->id),
 ),
 )); ?>

@@ -69,6 +69,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		'technician',
 		'report',
 		'observation',
+		'count',
 		array('label'=>'Garantía', 'value'=>$gar[$model_order->warranty]),
 		array('label'=>'Order', 'value'=>$model->order->id),
 ),

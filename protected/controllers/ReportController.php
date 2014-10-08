@@ -179,12 +179,14 @@ class ReportController extends RController
 			$criteria=new CDbCriteria;
 			$criteria->condition ="order_id = '$id'";
 			$model_pre=Report::model()->findAll($criteria);
+		
 			$idd=$model_pre[0]->id;
 			$criteria->condition ="report_id = '$idd'";
 			$rparts=ReportPart::model()->findAll($criteria);
 			
 			$model->order_id=$model_order->id;
 			$model->type = 1;
+			$model->count=$model_pre[0]->count;
 			$model->date = date("Y/m/d",time());
 			$model->report=$model_pre[0]->report;
 			$model->observation=$model_pre[0]->observation;
@@ -192,6 +194,7 @@ class ReportController extends RController
 			$profile=$user->profile;
 			$model->technician= $profile->nickname;
 			//$model->technician=$model_pre[0]->technician;
+			
 			if($model->save())
 				{
 					if(!empty($rparts))

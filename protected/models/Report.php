@@ -11,6 +11,7 @@
  * @property string $date
  * @property string $technician
  * @property integer $type
+ * @property integer $count
  *
  * The followings are the available model relations:
  * @property ReportPart[] $reportParts
@@ -36,11 +37,11 @@ class Report extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('order_id, technician', 'required'),
-			array('order_id, type', 'numerical', 'integerOnly'=>true),
+			array('order_id, type, count','numerical', 'integerOnly'=>true),
 			array('report, observation, date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, report, observation, order_id, date, technician, type', 'safe', 'on'=>'search'),
+			array('id, report, observation, order_id, date, technician, type, count', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,6 +71,7 @@ class Report extends CActiveRecord
 // 			'order_id' => 'Order',
 // 			'date' => 'Date',
 // 			'technician' => 'Technician',
+			'count'=>'Contador',
 			'type' => 'Tipo',
 			'id' => 'Nº de Informe',
 			'technician' => 'Técnico',
@@ -104,6 +106,7 @@ class Report extends CActiveRecord
 		$criteria->compare('date',$this->date,true);
 		$criteria->compare('technician',$this->technician,true);
 		$criteria->compare('type',$this->type);
+		$criteria->compare('count',$this->count);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

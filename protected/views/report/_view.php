@@ -15,6 +15,10 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('observation')); ?>:</b>
 	<?php echo CHtml::encode($data->observation); ?>
 	<br />
+	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('count')); ?>:</b>
+	<?php echo CHtml::encode($data->count); ?>
+	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('order_id')); ?>:</b>
 	<?php echo CHtml::encode($data->order_id); ?>

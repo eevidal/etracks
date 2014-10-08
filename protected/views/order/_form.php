@@ -22,7 +22,7 @@ $status <- Status::model()->findAll($criter);*/
 <br>
 	 
 
-	 <?php echo $form->textFieldGroup($model_cli,'id',array('class'=>'span5')); ?>
+	 <?php echo $form->hiddenField($model_cli,'id',array('class'=>'span5')); ?>
 	   <?php echo $form->textFieldGroup($model_cli,'type',array('class'=>'span5')); ?></h3>
 	 
 	 
@@ -76,7 +76,7 @@ $status <- Status::model()->findAll($criter);*/
  
 </div>	
 <div>
-<h3>Datos del Equipo <?php echo $form->textFieldGroup($model_equi,'id',array('class'=>'span5')); ?></h3>
+<h3>Datos del Equipo <?php echo $form->hiddenField($model_equi,'id',array('class'=>'span5')); ?></h3>
 	<?php //echo $form->textFieldGroup($model,'equipment_id',array('class'=>'span5')); ?>
 
 	<?php //echo $form->textFieldGroup($model,'client_id',array('class'=>'span5')); ?>
