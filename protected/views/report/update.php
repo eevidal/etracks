@@ -67,7 +67,8 @@ switch ($model_order['status_id'])
 							'model_part'=>$model_part,
 							'model_part_report'=>$model_part_report,)); 
 	}
-	else 
-	echo $this->renderPartial('_error',array('model'=>$model, 'msg'=>'No es posible modificar
+	else {
+	echo $this->render('error',array('id'=>$model_order->id, 'msg'=>'No es posible modificar
 		los datos del informe en el estado actual de la orden.'));
+		break;}
 ?>
