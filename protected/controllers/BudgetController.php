@@ -59,11 +59,17 @@ class BudgetController extends RController
 		$criteria=new CDbCriteria;
 
 		$criteria->condition ="id_order = '$id'";
+		$model_order=Order::model()->findByPk($id);
 		$model=Budget::model()->findAll($criteria);
-		$idd=$model[0]->id;
-		$this->render('view',array(
+		echo sizeof($model);
+		if(sizeof($model)>0)	
+		{
+			$idd=$model[0]->id;
+			$this->render('view',array(
 			'model'=>$this->loadModel($idd),
-		));
+			));
+		}else 	$this->render('view2',array(
+			'model'=>$model_order));
 	}
 
 	/**
@@ -101,23 +107,22 @@ class BudgetController extends RController
 			$model->id_user=$user->id;
 			$model->date = date("Y/m/d",time());
 			
+			//Verificar que el estado sea 3
+			if($model_order->status_id==3){
+				if($model->save())
+				{
+					$model_order->status_id=4;
+					$model_order->save();
 			
-			
-			if($model->save())
-			{
-							
-				$model_order->status_id=4;
-				$model_order->save();
-			
-				// Tracker record				
-				$model_tracker->date = date("Y/m/d",time());
-				$model_tracker->time = date("H:i:s",time());
-				$model_tracker->technician = $profile->nickname;
-				$model_tracker->status_id=$model_order->status_id;
-				$model_tracker->order_id = $model_report->order_id;
-				$model_tracker->save();
-				
-				$this->redirect(array('view','id'=>$model_order->id));
+					// Tracker record				
+					$model_tracker->date = date("Y/m/d",time());
+					$model_tracker->time = date("H:i:s",time());
+					$model_tracker->technician = $profile->nickname;
+					$model_tracker->status_id=$model_order->status_id;
+					$model_tracker->order_id = $model_report->order_id;
+					$model_tracker->save();
+					$this->redirect(array('view','id'=>$model_order->id));
+				}
 			}
 		}
 
@@ -165,11 +170,11 @@ class BudgetController extends RController
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
-
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+// 		$this->loadModel($id)->delete();
+// 
+// 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// 		if(!isset($_GET['ajax']))
+// 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**

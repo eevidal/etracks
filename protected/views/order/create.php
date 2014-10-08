@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Nuevo Ingreso</h1>
+<h2>Nuevo Ingreso</h2>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model, 'model_cli'=>$model_cli, 'model_equi'=>$model_equi)); ?>

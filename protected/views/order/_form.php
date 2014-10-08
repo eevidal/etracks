@@ -17,13 +17,13 @@ $status <- Status::model()->findAll($criter);*/
 
 	
 <div id=cliente>
-<h2>Datos del cliente           
+<h3>Datos del cliente           
 						
 <br>
 	 
 
 	 <?php echo $form->textFieldGroup($model_cli,'id',array('class'=>'span5')); ?>
-	   <?php echo $form->textFieldGroup($model_cli,'type',array('class'=>'span5')); ?></h2>
+	   <?php echo $form->textFieldGroup($model_cli,'type',array('class'=>'span5')); ?></h3>
 	 
 	 
 
@@ -76,7 +76,7 @@ $status <- Status::model()->findAll($criter);*/
  
 </div>	
 <div>
-<h2>Datos del Equipo <?php echo $form->textFieldGroup($model_equi,'id',array('class'=>'span5')); ?></h2>
+<h3>Datos del Equipo <?php echo $form->textFieldGroup($model_equi,'id',array('class'=>'span5')); ?></h3>
 	<?php //echo $form->textFieldGroup($model,'equipment_id',array('class'=>'span5')); ?>
 
 	<?php //echo $form->textFieldGroup($model,'client_id',array('class'=>'span5')); ?>
@@ -84,45 +84,36 @@ $status <- Status::model()->findAll($criter);*/
       
 
      
-		 <?php 
+ <?php 
 	 $this->widget('zii.widgets.jui.CJuiAutoComplete',
-    array(
-      'model'=>$model_equi,
-      'attribute'=>'serie',
-      'name'=>'Equipment_serie',
-      'source'=>  $this->createUrl('EquipmentAutocomplete'),
-      'htmlOptions'=>array('autocomplete'=>'off', 'placeholder'=>'Nº de Serie'),
-      'options'=>
-         array(
-               'showAnim'=>'fold',
-               'select'=>'js:function(event, ui) 
-                { $(".Equipment_serie").val(ui.item["serie"]); 
-		   $("#Equipment_name").val(ui.item["name"]);
-		    $("#Equipment_id").val(ui.item["id"]);
-		     $("#Order_equipment_id").val(ui.item["serie"]);
-                 }',
+	array(
+		'model'=>$model_equi,
+		'attribute'=>'serie',
+		'name'=>'Equipment_serie',
+		'source'=>  $this->createUrl('EquipmentAutocomplete'),
+		'htmlOptions'=>array('autocomplete'=>'off', 'placeholder'=>'Nº de Serie'),
+		'options'=>
+		array(
+			'showAnim'=>'fold',
+			'select'=>'js:function(event, ui) 
+				{ $(".Equipment_serie").val(ui.item["serie"]); 
+				$("#Equipment_name").val(ui.item["name"]);
+				$("#Equipment_id").val(ui.item["id"]);
+				$("#Order_equipment_id").val(ui.item["serie"]);
+				}',
                  
                 ),
-      'cssFile'=>true,
-   )); ?>
+		'cssFile'=>true,
+	)); ?>
    
 <span class="required">*</span>
-   
-     <?php echo $form->textFieldGroup($model_equi,'name',array('class'=>'span5')); ?><span class="required">*</span>
-<br>
+	<?php echo $form->textFieldGroup($model_equi,'name',array('class'=>'span5')); ?><span class="required">*</span><br>
 	<?php echo $form->textAreaGroup($model,'fail',array('class'=>'span8')); ?><span class="required">*</span>
-
-	<?php echo $form->checkBoxGroup($model,'warranty'); ?>
-<br>	
-	<?php echo $form->textAreaGroup($model,'adicional',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
-<br>	
+	<?php echo $form->checkBoxGroup($model,'warranty'); ?><br>	
+	<?php echo $form->textAreaGroup($model,'adicional',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?><br>	
 	<?php echo $form->textAreaGroup($model,'observation',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?> 
-
 </div>	
 <br>	
-	
-
-
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(

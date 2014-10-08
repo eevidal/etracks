@@ -2,9 +2,10 @@ body
 {
 	margin: 0;
 	padding: 0;
-	color: #555;
-	font: normal 10pt Arial,Helvetica,sans-serif;
+	color: #808080;
+	font: normal 1em Arial,Helvetica,sans-serif;
 	background: #EFEFEF;
+
 }
 
 #page
@@ -19,8 +20,17 @@ body
 {
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #C9E0ED; 
-	height:60px;
+/* 	border-top: 3px solid #C9E0ED;  */
+	height:9em; 
+	border-color:#bce8f1;
+	border-radius: 4px;
+	border:1px solid #bce8f1;
+	color:#808080;
+	border-top:transparent;
+	box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 1px 0px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.0470588) 0px 1px 1px 0px;
+	background:#EFFDFF;
+/* background-color: rgb(255, 255, 255); */
 	
 }
 
@@ -32,6 +42,7 @@ body
 #sidebar
 {
 	padding: 20px 20px 20px 0;
+	font-size: 1em;
 }
 
 #footer
@@ -45,21 +56,29 @@ body
 
 #logo
 {
-	padding: 10px 20px;
-	font-size: 200%;
+	
+	
+	padding: 20px 20px 10px 20px;
+	font-size: 2em;
 	float:left;
 /* 	width:200px; */
 }
 
 #mainmenu
 {
-	background:white url(bg.gif) repeat-x left top;
+	background-color: #f9f9f9;/*#B7D6E7;*/
+	border: 1px solid;
+	border-color:#bce8f1;
+	color:#808080;
+/* 	background:white url(bg.gif) repeat-x left top; */
 }
 
 #mainmenu ul
 {
 	padding:6px 20px 5px 20px;
 	margin:0px;
+/* 	margin-top:-1em; */
+	
 }
 
 #mainmenu ul li
@@ -69,9 +88,9 @@ body
 
 #mainmenu ul li a
 {
-	color:#ffffff;
+	color:#808080; /*#ffffff;*/
 	background-color:transparent;
-	font-size:12px;
+	font-size:1em;
 	font-weight:bold;
 	text-decoration:none;
 	padding:5px 8px;
@@ -171,7 +190,7 @@ div.search-form
 
 .portlet-title
 {
-	font-size: 12px;
+	font-size: 1.3em;
 	font-weight: bold;
 	padding: 0;
 	margin: 0;
@@ -180,7 +199,7 @@ div.search-form
 
 .portlet-content
 {
-	font-size:0.9em;
+	font-size:1em;
 	margin: 0 0 15px 0;
 	padding: 5px 8px;
 	background:#EFFDFF;
@@ -220,6 +239,7 @@ div.search-form
 	padding: 2px 0 2px 8px;
 	line-height: 15px;
 	text-decoration: none;
+	font-size:1em;
 }
 
 .operations li a:visited

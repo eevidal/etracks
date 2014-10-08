@@ -24,27 +24,57 @@ $this->breadcrumbs=array(
 	$orders=$model->SearchByStatus(8);
 	?>
 	<div  class="grid-view">
-		<table class="items table table-striped table-bordered table-condensed">
+ 		<table class="items table table-striped table-bordered table-condensed"> 
 		<?php
 		$p=array_shift($orders);
-		foreach($orders as $order) {
-			// var_dump($order);
-			echo "<tr>
-			<td>".$order["id"]."</td>
-			<td>".$order["client"]."</td>
-			<td>".$order["equipment"]."</td>
-			<td>".$order["date"]."</td>
-			<td class='button-column'> <a class='update'  data-toggle='tooltip'
-				href='/etracks/index.php?r=order/view&id=".$order['id']."'data-original-title='Ver'>
-				<i class='glyphicon glyphicon-eye-open'></i>
-			</a></td>	
-			</tr>";
-		}
+
+		$arrayDataProvider=new CArrayDataProvider($orders, array(
+			
+ 		'id'=>'id',
+		'sort'=>array(
+			'attributes'=>array(
+			'client', 'date',
+			),
+		),
+		'pagination'=>array(
+			
+			'pageSize'=>10,
+			'currentPage'=>0,
+			),
+		)); 			
+			
+		$columns=array(
+				array('name'=>'id', 'header'=>'#', 'htmlOptions'=>array('style'=>'width: 60px')),
+				array('name'=>'client', 'header'=>'Cliente'),
+				array('name'=>'equipment', 'header'=>'Equipo'),
+				array('name'=>'technician', 'header'=>'TecnicoR'),
+				array('name'=>'technician2', 'header'=>'Tecnico'),
+				array('name'=>'date', 'header'=>'Fecha'),
+
+				);
+		$this->widget('bootstrap.widgets.TbGridView',array(
+// 			'id'=>'user-grid',
+			'type'=>'striped bordered condensed',
+			'dataProvider'=>$arrayDataProvider,
+			'filter'=>null,
+			'template' => "{items}",
+			'template' => "{summary}{items}{pager}",
+			'enablePagination'=>true,
+			'columns'=>$columns,
+			'pager' => array('class' => 'bootstrap.widgets.TbPager',
+				'displayFirstAndLast' => true,),
+			'enablePagination'=> true,	
+				
+			));
 		?>
-		</table>
+		
+		
+ 		</table> 
 	</div>
  </div>
-</div>
+
+
+
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -60,21 +90,43 @@ $this->breadcrumbs=array(
 		<table class="items table table-striped table-bordered table-condensed">
 		<?php
 		$p=array_shift($orders);
-		foreach($orders as $order) {
-			// var_dump($order);
-			echo "<tr>
-			<td>".$order["id"]."</td>
-			<td>".$order["client"]."</td>
-			<td>".$order["equipment"]."</td>
-			<td>".$order["date"]."</td>
-			<td class='button-column'> <a class='update'  data-toggle='tooltip'
-				href='/etracks/index.php?r=order/view&id=".$order['id']."'data-original-title='Ver'>
-				<i class='glyphicon glyphicon-eye-open'></i>
-			</a></td>	
-			</tr>";
-		}
+		$arrayDataProvider2=new CArrayDataProvider($orders, array(
+			
+ 		'id'=>'id',
+		'sort'=>array(
+			'attributes'=>array(
+			'client', 'date',
+			),
+		),
+		'pagination'=>array(
+			
+			'pageSize'=>10,
+			'currentPage'=>0,
+			),
+		)); 			
+			
+		$columns=array(
+				array('name'=>'id', 'header'=>'#', 'htmlOptions'=>array('style'=>'width: 60px')),
+				array('name'=>'client', 'header'=>'Cliente'),
+				array('name'=>'equipment', 'header'=>'Equipo'),
+				array('name'=>'date', 'header'=>'Fecha'),
+
+				);
+		$this->widget('bootstrap.widgets.TbGridView',array(
+// 			'id'=>'user-grid',
+			'type'=>'striped bordered condensed',
+			'dataProvider'=>$arrayDataProvider2,
+			'filter'=>null,
+			'template' => "{items}",
+			'template' => "{summary}{items}{pager}",
+			'enablePagination'=>true,
+			'columns'=>$columns,
+			'pager' => array('class' => 'bootstrap.widgets.TbPager',
+				'displayFirstAndLast' => true,),
+			'enablePagination'=> true,	
+				
+			));
 		?>
 		</table>
 	</div>
  </div>
-</div>

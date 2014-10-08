@@ -146,6 +146,7 @@ class Order extends CActiveRecord
 					'technician'=>$rep[0]->technician,
 					'technician2'=>(!empty($rep[1]) )? $rep[1]->technician : "",
 					'date'=>$order->date,
+// 					'link'=>$order->id,
 					);
 				}
 				else {

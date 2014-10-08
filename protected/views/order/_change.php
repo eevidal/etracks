@@ -43,8 +43,10 @@ $data=$model;
 	<?php echo CHtml::encode($data->fail); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('warranty')); ?>:</b>
-	<?php echo CHtml::encode($data->warranty); ?>
+	<b><?php 
+	$gar= array('No', 'Sí');
+	echo CHtml::encode($data->getAttributeLabel('warranty')); ?>:</b>
+	<?php echo CHtml::encode($gar[$data->warranty]); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('status_id')); ?>:</b>
@@ -68,7 +70,7 @@ switch ($model['status_id'])
 	{
 
 	echo "<h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">Elegir nuevo estado: </b>";
-	echo $form->dropDownList($model,'status_id',array('5'=>'Autorizado','11'=>'Autorizado con cambios', '10'=>'Esperando repuestos','6'=>'Rechazado',)); 
+	echo $form->dropDownList($model,'status_id',array('5'=>'Autorizado','11'=>'Autorizado con cambios', '10'=>'Esperando repuestos','6'=>'No autorizado',)); 
 	
 	echo "</div></div></h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">";
 	echo " <h3 class=\"panel-title\">Si el presupuesto fue aceptado pero con cambios, explicar los cambios en el campo a continuación.
@@ -90,7 +92,7 @@ switch ($model['status_id'])
 	 break;
 	 }
 	 
-	case 7: //devolver
+	case 7: //entregar
 	{
 
 	echo "<h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">El nuevo estado será <b>Entregado</b></div></div></h4>";
@@ -102,10 +104,19 @@ switch ($model['status_id'])
 	case 9:
 	{
 
-	echo "<h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">El nuevo estado será <b>presupuestar</b></div></div></h4>";
-	//$id=3; echo $form->dropDownList($model,'status_id', CHtml::listData(Status::model()->findByPk(3), 'id', 'name')); 
-	 echo $form->hiddenField($model,'status_id',array('value'=>'3')); 
+	echo "<h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">Elegir nuevo estado: </b>";
+	echo $form->dropDownList($model,'status_id',array('5'=>'Autorizado','11'=>'Autorizado con cambios', '10'=>'Esperando repuestos','3'=>'Presupuestar','6'=>'No autorizado',)); 
+	
+	echo "</div></div></h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">";
+	echo " <h3 class=\"panel-title\">Si el presupuesto fue aceptado pero con cambios, explicar los cambios en el campo a continuación.
+	Si ya hay algún comentario, por favor, no lo borre.
+	
+	</h3>";
+
+	 echo $form->textAreaGroup($model,'observation',array('class'=>'span8'));
+	 echo "</div></div>";
 	 break;
+
 	 }
 	 
 	case 13:
@@ -155,7 +166,8 @@ switch ($model['status_id'])
   <div class="panel-body">
   Nueva <i class='glyphicon glyphicon-arrow-right'></i> revisando <i class='glyphicon glyphicon-arrow-right'></i>
   presupuestar<i class='glyphicon glyphicon-arrow-right'></i> presupuestado <i class='glyphicon glyphicon-arrow-right'></i>
-  autorizado <i class='glyphicon glyphicon-arrow-right'></i> listo<i class='glyphicon glyphicon-arrow-right'></i>entregado
+  {autorizado/ con cambios/ esperando repuestos} <i class='glyphicon glyphicon-arrow-right'></i> reparando
+  <i class='glyphicon glyphicon-arrow-right'></i>  listo<i class='glyphicon glyphicon-arrow-right'></i>entregado
   </div>
     <div class="panel-body">
   Nueva <i class='glyphicon glyphicon-arrow-right'></i> revisando <i class='glyphicon glyphicon-arrow-right'></i>

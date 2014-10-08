@@ -68,7 +68,7 @@
     array(
        'model'=>$model_part,
         'name' => 'Part',
-        'data' => CHtml::listData(Part::model()->findAll(), 'id', 'name'),
+        'data' => CHtml::listData(Part::model()->findAll(), 'id', 'name','description'),
         'htmlOptions' => array(
             'multiple' => 'multiple',
             

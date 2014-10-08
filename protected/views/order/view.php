@@ -20,7 +20,6 @@ switch ($model['status_id'])
 		array('label'=>'Imprimir Orden','url'=>array('pdf','id'=>$model->id)),
 		array('label'=>'-----------------------'),
 		array('label'=>'Registro de actividad','url'=>array('tracker/OrderView','id'=>$model->id)),
-		
 		);
 		break;
 	}
@@ -29,6 +28,7 @@ switch ($model['status_id'])
 	{
 		$this->menu=array(
 		array('label'=>'Actualizar Orden','url'=>array('update','id'=>$model->id)),
+// 		array('label'=>'Cambiar Estado','url'=>array('change', 'id'=>$model->id)), 
 		array( 'label'=>  'Crear presupuesto' ,'url'=>array( 'budget/create' ,'id'=>$model_report[0]->id)) , 
 		array('label'=>'Imprimir Orden','url'=>array('pdf','id'=>$model->id)),
 		array('label'=>'Ver Informe de presupuesto','url'=>array('report/OrderView','id'=>$model->id)),
@@ -56,7 +56,7 @@ switch ($model['status_id'])
 	case 6:
 	{
 		$this->menu=array(
-		array('label'=>'Actualizar Orden','url'=>array('update','id'=>$model->id)),
+ 		array('label'=>'Actualizar Orden','url'=>array('update','id'=>$model->id)),
 		array('label'=>'Devolver','url'=>array('change', 'id'=>$model->id)),
 		array('label'=>'Imprimir Orden','url'=>array('pdf','id'=>$model->id)),
 		array('label'=>'Ver Informe de presupuesto','url'=>array('report/OrderView','id'=>$model->id)),
@@ -111,7 +111,6 @@ switch ($model['status_id'])
 	{
 		$this->menu=array(
 		array('label'=>'Actualizar Orden','url'=>array('update','id'=>$model->id)),
-		
 		array('label'=>'Cambiar Estado','url'=>array('change', 'id'=>$model->id)), //directamente poner en presupuestar
 		array('label'=>'Imprimir Orden','url'=>array('pdf','id'=>$model->id)),
 		array('label'=>'Ver Informe de presupuesto','url'=>array('report/OrderView','id'=>$model->id)),
@@ -164,7 +163,7 @@ if (in_array($model->status_id,array(8,12),true )) {
 	$tracker = Tracker::model()->findAll($criteria);
 	//var_dump($tracker);
 }
-$gar= array('Sí', 'No');
+$gar= array('No', 'Sí');
 $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -176,7 +175,6 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		'fail',
 		array('label'=>'Garantía', 'value'=>$gar[$model->warranty]),
 		array('label'=>'Estado', 'value'=>$model->status->name),
-		
 		'adicional',
 		'observation',
 	),

@@ -107,8 +107,8 @@ $this->render('update',array(
 * If deletion is successful, the browser will be redirected to the 'admin' page.
 * @param integer $id the ID of the model to be deleted
 */
-// public function actionDelete($id)
-// {
+public function actionDelete($id)
+{
 // if(Yii::app()->request->isPostRequest)
 // {
 // // we only allow deletion via POST request
@@ -120,7 +120,7 @@ $this->render('update',array(
 // }
 // else
 // throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-// }
+ }
 
 /**
 * Lists all models.

@@ -60,7 +60,7 @@ switch ($model_order['status_id'])
 <h2>Informe de <?php echo $typ[$model->type]; ?></h2>
 <div class="view">
 <?php 
-$gar= array('Sí', 'No');
+$gar= array('No', 'Sí');
 $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,
 'type'=>'striped bordered condensed',
