@@ -9,6 +9,51 @@ $this->breadcrumbs=array(
 
 switch ($model_order['status_id'])
 {	
+
+	case 2:
+	{
+		$this->menu=array(
+		array('label'=>'Ver Orden','url'=>array('order/view','id'=>$model_order->id)),
+		);
+		break;
+	}
+	
+	case 3:
+	{
+		$this->menu=array(
+		array('label'=>'Ver Orden','url'=>array('order/view','id'=>$model_order->id)),
+		array('label'=>'-----------------------'),
+		array('label'=>'Cambiar Estado Admin','url'=>array('order/change2', 'id'=>$model_order->id)),
+		);
+		break;
+	}
+	
+	case 7:
+	{
+		if ($model->type==1)
+		{
+		$this->menu=array(
+		array('label'=>'Ver Orden','url'=>array('order/view','id'=>$model_order->id)),
+		array('label'=>'-----------------------'),
+		array('label'=>'Cambiar Estado Admin','url'=>array('order/change2', 'id'=>$model_order->id)),
+		);
+		}
+		else
+		{$this->menu=array(
+		array('label'=>'Ver Orden','url'=>array('order/view','id'=>$model_order->id)));
+		}
+		break;
+		
+	}
+	
+	case 8:
+	{
+		$this->menu=array(
+		array('label'=>'Ver Orden','url'=>array('order/view','id'=>$model_order->id)),
+		);
+		break;
+	}
+	
 	case 9: //Revisando
 	{
 		$this->menu=array(
@@ -17,6 +62,13 @@ switch ($model_order['status_id'])
 		array('label'=>'Ver Orden','url'=>array('order/view','id'=>$model_order->id)),
 		);
 		break;
+	}
+	
+	case 12:
+	{
+		$this->menu=array(
+		array('label'=>'Ver Orden','url'=>array('order/view','id'=>$model_order->id)),
+		);
 	}
 	
 	case 13: //Reparando
@@ -46,6 +98,7 @@ switch ($model_order['status_id'])
 	{
 		$this->menu=array(
 		array('label'=>'Ver Orden','url'=>array('order/view','id'=>$model_order->id)),
+		
 		);
 	}
 	
@@ -158,7 +211,8 @@ if(!empty($return_array))
 
 	<b class="report"><?php echo CHtml::encode($data->getAttributeLabel('warranty')); ?>:</b>
 	<?php echo CHtml::encode($gar[$data->warranty]); ?>
-	<br/>
+	<br/><b class="report"><?php echo CHtml::encode($data->getAttributeLabel('observation')); ?>:</b>
+	<font color="#FF0000"><?php echo CHtml::encode($data->observation); ?></font><br/>
 	<b class="report"><?php echo CHtml::encode($data->getAttributeLabel('adicional')); ?>:</b>
 	<?php echo CHtml::encode($data->adicional); ?>
 

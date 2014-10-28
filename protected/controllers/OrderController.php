@@ -35,7 +35,7 @@ class OrderController extends RController
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'ClientAutocomplete', 'EquipmentAutocomplete','Pdf','change'),
+				'actions'=>array('create','update', 'ClientAutocomplete', 'EquipmentAutocomplete','Pdf','change','change2'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -229,7 +229,64 @@ class OrderController extends RController
 		));
 	}
 
-	
+	public function actionChange2($id)
+	{
+		$model=$this->loadModel($id);
+		$model_status=new Status;
+		$model_status->id=$model->status_id;
+		$model_tracker=new Tracker;
+		
+		$criteria=new CDbCriteria;
+		$criteria->condition ="order_id = '$id'";
+		$model_report=Report::model()->findAll($criteria);
+		
+		
+		$iid=$model_report[0]->id;	
+		$criteria->condition ="report_id = '$iid'";
+		$model_part_report=ReportPart::model()->findAll($criteria);
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Order']))
+		{
+			$model->attributes=$_POST['Order'];
+			PC::debug('Short way to debug directly in PHP Console', 'some,debug,tags');
+			if($model->save())
+			{
+				//Stock
+				if($model_status->id=='7')
+				{
+					foreach($model_part_report as $m)
+					{
+						$part_id=$m->part_id;
+						$model_part=Part::model()->findByPk($part_id);
+						$stock=$model_part->stock;
+						$model_part->stock= $stock + $m->quantity;
+						$model_part->save();
+					}
+				}
+				// Tracker record		
+				//$model_tracker->attributes=$_POST['Tracker'];
+				$user =Yii::app()->getModule('user')->user();
+				$profile=$user->profile;
+				$model_tracker->technician =$profile->nickname;
+				$model_tracker->date = date("Y/m/d",time());
+				$model_tracker->time = date("H:i:s",time());
+				$model_tracker->status_id=$model->status_id;
+				$model_tracker->order_id = $model->id;
+				$model_tracker->save();
+				
+				$this->redirect(array('view','id'=>$model->id));
+			}	
+		}
+
+		$this->render('change2',array(
+			'model'=>$model,
+			'model_status'=>$model_status,
+			'model_tracker'=>$model_tracker,
+		));
+	}
+
 
 	/**
 	 * Deletes a particular model.
