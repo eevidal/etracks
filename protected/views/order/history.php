@@ -50,10 +50,27 @@ $this->breadcrumbs=array(
 				array('name'=>'technician', 'header'=>'TecnicoR'),
 				array('name'=>'technician2', 'header'=>'Tecnico'),
 				array('name'=>'date', 'header'=>'Fecha'),
+				array( 'header'=>'ver',
+					'class'=>'booster.widgets.TbButtonColumn',
+					'template'=>'{view}',
+
+					'buttons'=>array(       
+				
+					'view' => array(
+						 'label'=>'Ver',
+// 						'visible'=>true,
+// 						'icon'=>'plus',
+						'url'=>'Yii::app()->controller->createUrl("order/view", array("id"=>"$data[id]"))',
+						 'options'=>array( 'class'=>'btn btn btn-small',),
+// 						'value' =>'CHtml::link($columns->id, Yii::app()->createUrl("order/view", array("id"=>$columns->id)))',
+                                ),
+                                
+                        ),
+                ),      
 
 				);
-		$this->widget('bootstrap.widgets.TbGridView',array(
-// 			'id'=>'user-grid',
+		$this->widget('booster.widgets.TbGridView',array(
+//  			'id'=>'user-grid',
 			'type'=>'striped bordered condensed',
 			'dataProvider'=>$arrayDataProvider,
 			'filter'=>null,
@@ -61,8 +78,10 @@ $this->breadcrumbs=array(
 			'template' => "{summary}{items}{pager}",
 			'enablePagination'=>true,
 			'columns'=>$columns,
-			'pager' => array('class' => 'bootstrap.widgets.TbPager',
-				'displayFirstAndLast' => true,),
+			'pager' => array('class' => 'booster.widgets.TbPager',
+				'displayFirstAndLast' => true,
+				'htmlOptions'=>array('style'=>'display:inline-block; text-decoration:none'),
+				),
 			'enablePagination'=> true,	
 				
 			));
@@ -110,9 +129,24 @@ $this->breadcrumbs=array(
 				array('name'=>'client', 'header'=>'Cliente'),
 				array('name'=>'equipment', 'header'=>'Equipo'),
 				array('name'=>'date', 'header'=>'Fecha'),
+				array( 'header'=>'ver',
+					'class'=>'booster.widgets.TbButtonColumn',
+					'template'=>'{view}',
+
+					'buttons'=>array(       
+				
+					'view' => array(
+
+						'url'=>'Yii::app()->controller->createUrl("order/view", array("id"=>"$data[id]"))',
+						 'options'=>array( 'class'=>'btn btn btn-small',),
+// 						'value' =>'CHtml::link($columns->id, Yii::app()->createUrl("order/view", array("id"=>$columns->id)))',
+                                ),
+                                
+                        ),
+                ),      
 
 				);
-		$this->widget('bootstrap.widgets.TbGridView',array(
+		$this->widget('booster.widgets.TbGridView',array(
 // 			'id'=>'user-grid',
 			'type'=>'striped bordered condensed',
 			'dataProvider'=>$arrayDataProvider2,
@@ -121,7 +155,7 @@ $this->breadcrumbs=array(
 			'template' => "{summary}{items}{pager}",
 			'enablePagination'=>true,
 			'columns'=>$columns,
-			'pager' => array('class' => 'bootstrap.widgets.TbPager',
+			'pager' => array('class' => 'booster.widgets.TbPager',
 				'displayFirstAndLast' => true,),
 			'enablePagination'=> true,	
 				
