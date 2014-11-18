@@ -64,12 +64,14 @@
 
  <h5>Partes</h5>
  <?php  
+ 
+ 
    $this->widget(
     'booster.widgets.TbSelect2',
     array(
        'model'=>$model_part,
         'name' => 'Part',
-        'data' => CHtml::listData(Part::model()->findAll(), 'id', 'name','description'),
+        'data' => CHtml::listData(Part::model()->findAll(), 'id','description', 'name'),
         'htmlOptions' => array(
             'multiple' => 'multiple',
             

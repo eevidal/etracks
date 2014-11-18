@@ -349,7 +349,7 @@ class ReportController extends RController
 		public function actionPartAutocomplete () {
 		if (isset($_GET['term'])) {
 			$criteria=new CDbCriteria;
-			$criteria->condition ="LOWER(name) like LOWER(:term) ";
+			$criteria->condition ="LOWER(name) like LOWER(:term) or LOWER(description) like LOWER(:term) ";
 			$criteria->params = array(':term'=> '%'.$_GET['term'].'%');
 			$parts = Part::model()->findAll($criteria);
 			$return_array[]=array();

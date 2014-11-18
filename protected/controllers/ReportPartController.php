@@ -228,7 +228,7 @@ class ReportPartController extends RController
 			$criteria=new CDbCriteria;
 			//$criteria->alias = "clients";
 			//$criteria->condition = "clients.name like '" . $_GET['term'] . "%'";
-			$criteria->condition ="LOWER(name) like LOWER(:term) or LOWER(description) like LOWER(:term)";
+			$criteria->condition ="LOWER(description) like LOWER(:term) or LOWER(name) like LOWER(:term) ";
 			$criteria->params = array(':term'=> '%'.$_GET['term'].'%');
 			//$dataProvider = new CActiveDataProvider(get_class(Client::model()), array('criteria'=>$criteria,‘pagination’=>false,));
 			//$clients = $dataProvider->getData();
