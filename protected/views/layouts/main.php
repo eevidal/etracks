@@ -33,7 +33,7 @@
 
 	<div id="header">
 		<div id="logo">
-		<img id="logo1" src="<?php echo Yii::app()->request->baseUrl; ?>/images/icon-tools.png">
+<!--		<img id="logo1" src="<?php echo Yii::app()->request->baseUrl; ?>/images/icon-tools.png">-->
 		<?php echo CHtml::encode(Yii::app()->name); ?>
 		: Sistema de seguimiento de reparación de equipos</div>
 <!-- 		<div id="logo1"></div> -->
