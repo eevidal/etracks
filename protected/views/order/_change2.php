@@ -89,7 +89,24 @@ switch ($model['status_id'])
 		break;
 	 }
 	
-
+	 case 14:	
+	 {
+		 echo "<h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">Elegir nuevo estado: </b>";
+		 echo $form->hiddenField($model,'status_id',array('class'=>'span5')); 
+		 echo $form->dropDownList($model,'status_id',array('16'=>'Alquilado')); 
+		 echo "</div></div>";
+		 break;
+	  }
+	 
+	  case 16:	
+	  {
+		  echo "<h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">Elegir nuevo estado: </b>";
+		  echo $form->hiddenField($model,'status_id',array('class'=>'span5')); 
+		  echo $form->dropDownList($model,'status_id',array('14'=>'Para Alquiler')); 
+		  echo "</div></div>";
+		  break;
+	   }
+	  
 
 	 
  	default:

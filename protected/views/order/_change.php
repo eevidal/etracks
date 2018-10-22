@@ -130,6 +130,25 @@ switch ($model['status_id'])
 	 break;
 	 }
 	  
+	 	 
+	case 14: //alquilar
+	{
+
+	echo "<h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">El nuevo estado será <b>Alquilado</b></div></div></h4>";
+	//$id=3; echo $form->dropDownList($model,'status_id', CHtml::listData(Status::model()->findByPk(3), 'id', 'name')); 
+	 echo $form->hiddenField($model,'status_id',array('value'=>'16')); 
+	 break;
+	 } 
+
+	 	 	 
+	case 16: //entregar
+	{
+
+	echo "<h4><div class=\"panel panel-info\">  <div class=\"panel-heading\">El nuevo estado será <b>Para alquiler</b></div></div></h4>";
+	//$id=3; echo $form->dropDownList($model,'status_id', CHtml::listData(Status::model()->findByPk(3), 'id', 'name')); 
+	 echo $form->hiddenField($model,'status_id',array('value'=>'14')); 
+	 break;
+	 } 
 
 
 	 default:
