@@ -13,15 +13,15 @@ $this->breadcrumbs=array(
 
 
 
-<div class="panel panel-success">
+<div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">	<i class='glyphicon glyphicon-pushpin'></i>
-	Ordenes Entregadas</h3>
+	Ordenes de equipos para alquiler</h3>
   </div>
 <div class="panel-body">
 	<?php 
 	
-	$orders=$model->SearchByStatus(8);
+	$orders=$model->SearchByStatus(14);
 	?>
 	<div  class="grid-view">
  		<table class="items table table-striped table-bordered table-condensed"> 
@@ -38,7 +38,7 @@ $this->breadcrumbs=array(
 		),
 		'pagination'=>array(
 			
-			'pageSize'=>10,
+			'pageSize'=>5,
 			'currentPage'=>0,
 			),
 		)); 			
@@ -98,7 +98,147 @@ $this->breadcrumbs=array(
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">	<i class='glyphicon glyphicon-pushpin'></i>
-	Ordenes Devueltas</h3>
+	Ordenes de equipos para scrap</h3>
+  </div>
+<div class="panel-body">
+	<?php 
+	
+	$orders=$model->SearchByStatus(15);
+	?>
+	<div  class="grid-view">
+		<table class="items table table-striped table-bordered table-condensed">
+		<?php
+		$p=array_shift($orders);
+		$arrayDataProvider2=new CArrayDataProvider($orders, array(
+			
+ 		'id'=>'id',
+		'sort'=>array(
+			'attributes'=>array(
+			'client', 'date',
+			),
+		),
+		'pagination'=>array(
+			
+			'pageSize'=>5,
+			'currentPage'=>0,
+			),
+		)); 			
+			
+		$columns=array(
+				array('name'=>'id', 'header'=>'#', 'htmlOptions'=>array('style'=>'width: 60px')),
+				array('name'=>'client', 'header'=>'Cliente'),
+				array('name'=>'equipment', 'header'=>'Equipo'),
+				array('name'=>'date', 'header'=>'Fecha'),
+				array( 'header'=>'ver',
+					'class'=>'booster.widgets.TbButtonColumn',
+					'template'=>'{view}',
+
+					'buttons'=>array(       
+				
+					'view' => array(
+
+						'url'=>'Yii::app()->controller->createUrl("order/view", array("id"=>"$data[id]"))',
+						 'options'=>array( 'class'=>'btn btn btn-small',),
+// 						'value' =>'CHtml::link($columns->id, Yii::app()->createUrl("order/view", array("id"=>$columns->id)))',
+                                ),
+                                
+                        ),
+                ),      
+
+				);
+		$this->widget('booster.widgets.TbGridView',array(
+// 			'id'=>'user-grid',
+			'type'=>'striped bordered condensed',
+			'dataProvider'=>$arrayDataProvider2,
+			'filter'=>null,
+			'template' => "{items}",
+			'template' => "{summary}{items}{pager}",
+			'enablePagination'=>true,
+			'columns'=>$columns,
+			'pager' => array('class' => 'booster.widgets.TbPager',
+				'displayFirstAndLast' => true,),
+			'enablePagination'=> true,	
+				
+			));
+		?>
+		</table>
+	</div>
+ </div>
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">	<i class='glyphicon glyphicon-pushpin'></i>
+	Ordenes de equipos entregados</h3>
+  </div>
+<div class="panel-body">
+	<?php 
+	
+	$orders=$model->SearchByStatus(8);
+	?>
+	<div  class="grid-view">
+		<table class="items table table-striped table-bordered table-condensed">
+		<?php
+		$p=array_shift($orders);
+		$arrayDataProvider2=new CArrayDataProvider($orders, array(
+			
+ 		'id'=>'id',
+		'sort'=>array(
+			'attributes'=>array(
+			'client', 'date',
+			),
+		),
+		'pagination'=>array(
+			
+			'pageSize'=>5,
+			'currentPage'=>0,
+			),
+		)); 			
+			
+		$columns=array(
+				array('name'=>'id', 'header'=>'#', 'htmlOptions'=>array('style'=>'width: 60px')),
+				array('name'=>'client', 'header'=>'Cliente'),
+				array('name'=>'equipment', 'header'=>'Equipo'),
+				array('name'=>'date', 'header'=>'Fecha'),
+				array( 'header'=>'ver',
+					'class'=>'booster.widgets.TbButtonColumn',
+					'template'=>'{view}',
+
+					'buttons'=>array(       
+				
+					'view' => array(
+
+						'url'=>'Yii::app()->controller->createUrl("order/view", array("id"=>"$data[id]"))',
+						 'options'=>array( 'class'=>'btn btn btn-small',),
+// 						'value' =>'CHtml::link($columns->id, Yii::app()->createUrl("order/view", array("id"=>$columns->id)))',
+                                ),
+                                
+                        ),
+                ),      
+
+				);
+		$this->widget('booster.widgets.TbGridView',array(
+// 			'id'=>'user-grid',
+			'type'=>'striped bordered condensed',
+			'dataProvider'=>$arrayDataProvider2,
+			'filter'=>null,
+			'template' => "{items}",
+			'template' => "{summary}{items}{pager}",
+			'enablePagination'=>true,
+			'columns'=>$columns,
+			'pager' => array('class' => 'booster.widgets.TbPager',
+				'displayFirstAndLast' => true,),
+			'enablePagination'=> true,	
+				
+			));
+		?>
+		</table>
+	</div>
+ </div>
+
+ <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">	<i class='glyphicon glyphicon-pushpin'></i>
+	Ordenes de equipos devueltos</h3>
   </div>
 <div class="panel-body">
 	<?php 
@@ -119,7 +259,7 @@ $this->breadcrumbs=array(
 		),
 		'pagination'=>array(
 			
-			'pageSize'=>10,
+			'pageSize'=>5,
 			'currentPage'=>0,
 			),
 		)); 			

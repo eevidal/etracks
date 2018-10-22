@@ -172,10 +172,37 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		array('label'=>'Fecha de egreso', 'value'=> (!empty($tracker)) ? $tracker[0]->date : ''),
 		array('label'=>'Equipo', 'value'=>$model->equipment->name),
 		array('label'=>'Cliente', 'value'=>$model->client->name),
+	
 		'fail',
 		array('label'=>'Garantía', 'value'=>$gar[$model->warranty]),
 		array('label'=>'Estado', 'value'=>$model->status->name),
 		'adicional',
 		'observation',
 	),
-)); ?>
+));
+
+echo "<h1>Detalles cliente</h1>";
+$this->widget('bootstrap.widgets.TbDetailView',array(
+	'data'=>$model,
+	'attributes'=>array(
+	//	'id',
+		array('label'=>'Nº Cliente', 'value'=>$model->client->id),
+		array('label'=>'Tipo', 'value'=>$model->client->type),
+		array('label'=>'Cliente', 'value'=>$model->client->name),
+		array('label'=>'Razón social', 'value'=>$model->client->comercial_name),
+		array('label'=>'Dirección', 'value'=>$model->client->address1),
+		array('label'=>'Dirección 2', 'value'=>$model->client->address2),
+		array('label'=>'Teléfono', 'value'=>$model->client->phone1),
+		array('label'=>'Teléfono 2', 'value'=>$model->client->phone2),
+		array('label'=>'Mail', 'value'=>$model->client->mail),
+		array('label'=>'Contacto', 'value'=>$model->client->contact),
+		array('label'=>'Ciudad', 'value'=>$model->client->city),
+		array('label'=>'Código postal', 'value'=>$model->client->postal_code),
+		array('label'=>'Comentarios', 'value'=>$model->client->comment),
+
+
+	),
+)); 
+
+?>
+

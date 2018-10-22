@@ -14,8 +14,7 @@
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('client_id')); ?>:</b>
 	<?php echo CHtml::encode($data->client->name); ?>
-	<br />
-
+	
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fail')); ?>:</b>
 	<?php echo CHtml::encode($data->fail); ?>
 	<br />
@@ -30,3 +29,4 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('observation')); ?>:</b>
 	<font color="#FF0000"><?php echo CHtml::encode($data->observation); ?></font>
 </div>
+
