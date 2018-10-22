@@ -129,7 +129,9 @@ switch ($model['status_id'])
 	 echo $form->hiddenField($model,'status_id',array('value'=>'7')); 
 	 break;
 	 }
-	 
+	  
+
+
 	 default:
 	 {
 		$this->redirect(array('error','id'=>$model->id,'msg'=>'No es posible alterar manualmente el estado actual de la orden.'));
@@ -167,7 +169,7 @@ switch ($model['status_id'])
   Nueva <i class='glyphicon glyphicon-arrow-right'></i> revisando <i class='glyphicon glyphicon-arrow-right'></i>
   presupuestar<i class='glyphicon glyphicon-arrow-right'></i> presupuestado <i class='glyphicon glyphicon-arrow-right'></i>
   {autorizado/ con cambios/ esperando repuestos} <i class='glyphicon glyphicon-arrow-right'></i> reparando
-  <i class='glyphicon glyphicon-arrow-right'></i>  listo<i class='glyphicon glyphicon-arrow-right'></i>{entregado/ para_alquiler/ scrap}
+  <i class='glyphicon glyphicon-arrow-right'></i>  listo<i class='glyphicon glyphicon-arrow-right'></i>{entregado/ para_alquiler/ scrap /alquilado}
   </div>
     <div class="panel-body">
   Nueva <i class='glyphicon glyphicon-arrow-right'></i> revisando <i class='glyphicon glyphicon-arrow-right'></i>

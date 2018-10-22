@@ -133,6 +133,45 @@ switch ($model['status_id'])
 		);
 		break;
 	}
+
+	case 14: //Para Alquiler
+	{
+		$this->menu=array(
+		array('label'=>'Actualizar Orden','url'=>array('update','id'=>$model->id)),
+		array('label'=>'Cambiar Estado','url'=>array('change', 'id'=>$model->id)), //directamente poner en presupuestar
+		array('label'=>'Imprimir Orden','url'=>array('pdf','id'=>$model->id)),
+		array('label'=>'Ver Informe de presupuesto','url'=>array('report/OrderView','id'=>$model->id)),
+		array('label'=>'-----------------------'),
+		array('label'=>'Registro de actividad','url'=>array('tracker/OrderView','id'=>$model->id)),		
+		);
+		break;
+	}
+
+	case 15: //Scrap
+	{
+		$this->menu=array(
+		array('label'=>'Actualizar Orden','url'=>array('update','id'=>$model->id)),
+		array('label'=>'Cambiar Estado','url'=>array('change', 'id'=>$model->id)), //directamente poner en presupuestar
+		array('label'=>'Imprimir Orden','url'=>array('pdf','id'=>$model->id)),
+		array('label'=>'Ver Informe de presupuesto','url'=>array('report/OrderView','id'=>$model->id)),
+		array('label'=>'-----------------------'),
+		array('label'=>'Registro de actividad','url'=>array('tracker/OrderView','id'=>$model->id)),		
+		);
+		break;
+	}
+
+	case 16: //Alquilada
+	{
+		$this->menu=array(
+		array('label'=>'Actualizar Orden','url'=>array('update','id'=>$model->id)),
+		array('label'=>'Cambiar Estado','url'=>array('change', 'id'=>$model->id)), //directamente poner en presupuestar
+		array('label'=>'Imprimir Orden','url'=>array('pdf','id'=>$model->id)),
+		array('label'=>'Ver Informe de presupuesto','url'=>array('report/OrderView','id'=>$model->id)),
+		array('label'=>'-----------------------'),
+		array('label'=>'Registro de actividad','url'=>array('tracker/OrderView','id'=>$model->id)),		
+		);
+		break;
+	}
 	
 	
 	// 5-10-11 //Autorizado/con mod/esperando rep
