@@ -57,7 +57,7 @@ class OrderController extends RController
 		$criteria=new CDbCriteria;
 
 		$criteria->condition ="order_id = '$id'";
-		$model_report=Report::model()->findAll($criteria);
+		$model_report=Report::model()->findAll($criteria);  //id del informe de presupuesto
 		$criteria->condition ="id_order = '$id'";
 		$model_budget=Budget::model()->findAll($criteria);
 		$this->render('view',array(

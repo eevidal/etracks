@@ -32,11 +32,11 @@ class BudgetController extends RController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index', 'pdf'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'view'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -55,21 +55,43 @@ class BudgetController extends RController
 	 */
 	public function actionView($id)
 	{
-		//$model_report=Report::model()->findByPk($id);
+		$model_report=Report::model()->findByPk($id);
 		$criteria=new CDbCriteria;
-
 		$criteria->condition ="id_order = '$id'";
-		$model_order=Order::model()->findByPk($id);
+		$model_order=Order::model()->findByPk($model_report->order_id);
 		$model=Budget::model()->findAll($criteria);
 		echo sizeof($model);
 		if(sizeof($model)>0)	
 		{
 			$idd=$model[0]->id;
-			$this->render('view',array(
-			'model'=>$this->loadModel($idd),
-			));
+			$model_client=Client::model()->findByPk($model_order->client->id);
+                        $model_equipment=Equipment::model()->findByPk($model_order->equipment->id);
+                        $criteria->condition ="report_id = '$id'";
+                        $model_part_report=ReportPart::model()->findAll($criteria);
+                        $model_part=new Part;
+                        
+			if(isset($_POST['Budget']))
+                        {
+                            $model[0]->attributes=$_POST['Budget'];
+                            $model[0]->save();
+                        }
+                          
+                        $this->render('view',array(
+			'model'=>$model[0],
+                        'model_order'=>$model_order,
+                        'model_report'=>$model_report,
+                        'model_client'=>$model_client,
+                        'model_part_report'=>$model_part_report,
+                        'model_part'=>$model_part,
+			'model_equipment'=>$model_equipment,
+                         ));
+                         	
+			
 		}else 	$this->render('view2',array(
 			'model'=>$model_order));
+		
+
+			
 	}
 
 	/**
@@ -122,11 +144,11 @@ class BudgetController extends RController
 					$model_tracker->order_id = $model_report->order_id;
 					$model_tracker->save();
 					$this->redirect(array('view','id'=>$model_order->id));
-				}
+                                        }
 			}
 		}
 
-		$this->render('create',array(
+                $this->render('create',array(
 			'model'=>$model,
 			'model_order'=>$model_order,
 			'model_report'=>$model_report,
@@ -229,5 +251,17 @@ class BudgetController extends RController
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	public function actionPdf($id)
+	{
+                $model=Budget::model()->findByPk($id);
+                $model_order=Order::model()->findByPk($model->id_order);
+		$this->renderPartial('pdf',array(
+			'model'=>$model,
+			'model_order' =>$model_order
+			
+		));
+//		
 	}
 }

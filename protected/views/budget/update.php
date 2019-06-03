@@ -15,4 +15,10 @@ $this->breadcrumbs=array(
 
 	<h1>Update Budget <?php echo $model->id; ?></h1>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'model_order'=>$model_order,
+'model_equipment'=>$model_equipment, 'model_part'=>$model_part, 'model_report'=>$model_report,
+			'model_client'=>$model_client,
+			'model_part_report'=>$model_part_report,
+			'model_part'=>$model_part,
+			 )); 
+?>

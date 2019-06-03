@@ -304,7 +304,7 @@ class Editable extends CWidget
     public $cssFile='jquery-ui.css';
 
     protected $_prepareToAutotext = false;
-
+   	
     /**
     * initialization of widget
     *
@@ -538,7 +538,7 @@ class Editable extends CWidget
 
         // bootstrap
         if($form === EditableConfig::FORM_BOOTSTRAP) {
-            if (($bootstrap = yii::app()->getComponent('bootstrap'))) {
+            if (($bootstrap = yii::app()->getComponent('bootstrap2'))) {
                 $bootstrap->registerCoreCss();
                 $bootstrap->registerCoreScripts();
             } else {
