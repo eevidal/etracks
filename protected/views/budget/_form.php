@@ -24,7 +24,19 @@
 
 	<?php //echo $form->datepickerGroup($model,'date',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
 
-	<?php echo $form->textAreaGroup($model,'budget',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+	<?php echo $form->textAreaGroup($model,'budget',array('rows'=>10, 'cols'=>40, 'class'=>'span8')); ?>
+
+
+    <?php
+    /*    $this->widget('editable.EditableField', array(
+            'type'        => 'textarea',
+            'model'       => $model,
+            'attribute'   => 'budget',
+            'url'         => $this->createUrl('budget/create'), 
+            'placement'   => 'right',
+            'showbuttons' => 'bottom',
+        ));*/
+    ?>
 
 <div class="form-actions">
 	<?php $this->widget('booster.widgets.TbButton', array(
