@@ -226,7 +226,7 @@ class ReportController extends RController
 			
  		} elseif (in_array($model_order->status_id,array(3,4,6,7,8,12,13),true))
 			{	$this->render('error',array('id'=>$model_order->id,'msg'=>'No es posible crear informes en el estado actual de la orden.'));
-			break;}
+			}
 		
 
 		
