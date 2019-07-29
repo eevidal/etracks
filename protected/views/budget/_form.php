@@ -1,6 +1,6 @@
 <?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
 	'id'=>'budget-form',
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 )); ?>
 
 
@@ -15,7 +15,7 @@
   </div>
   <div class="panel-body">
   Se puede ingresar el monto presupuestado o cualquier otro comentario. Al crear el presupuesto la orden de trabajo
- automaticamente quedará en estado <b>presupuestada</b>. Luego el presupuesto no podrá ser modificado. 
+ automaticamente quedará en estado <b>presupuestada</b>. Luego el presupuesto podrá ser modificado. 
  La aceptación o rechazo del presupuesto se lleva a cabo en otra instancia. 
  Está información es sólo visible para los usuarios de administración.
   </div>
@@ -24,8 +24,23 @@
 
 	<?php //echo $form->datepickerGroup($model,'date',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
 
-	<?php echo $form->textAreaGroup($model,'budget',array('rows'=>10, 'cols'=>40, 'class'=>'span8')); ?>
+	<?php //echo $form->textAreaGroup($model,'budget',array('rows'=>10, 'cols'=>40, 'class'=>'span8')); ?>
+	<?php 
+	
+	$this->widget('application.components.widgets.XHeditor',array(
+				'model'=>$model,
+				'modelAttribute'=>'budget',
+				'showModelAttributeValue'=>true, // defaults to true, displays the value of $modelInstance->attribute in the textarea
+				'config'=>array(
+					'id'=>'xh1',
+					
+					'tools'=>'fill', // mini, simple, fill or from XHeditor::$_tools
+					'width'=>'100%',
+					//see XHeditor::$_configurableAttributes for more
+				),
+			));
 
+?>
 
     <?php
     /*    $this->widget('editable.EditableField', array(
@@ -42,7 +57,7 @@
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
-			'label'=>$model->isNewRecord ? 'Presupuestar' : 'Save',
+			'label'=>$model->isNewRecord ? 'Presupuestar' : 'Guardar',
 		)); ?>
 </div>
 
